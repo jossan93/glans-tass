@@ -20,3 +20,21 @@ export const createUser = async (req: Request, res: Response) => {
         res.status(500).json({ error: "kunde inte skapa användare" });
     }
 };
+
+export const loginUser = async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
+
+        //kolla om användaren finns
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ error: "fel epost eller lösenord" });
+        }
+
+        // jämföra lösenord
+
+        // skapa JWT-token
+    }
+
+  
+};
