@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/User";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -32,9 +34,21 @@ export const loginUser = async (req: Request, res: Response) => {
         }
 
         // jämföra lösenord
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ error: "fel epost eller lösenord" });
+        }
 
         // skapa JWT-token
-    }
+        const token = jwt.sign(
+            { userId: user._id, email: user.email },
+            process.env.JWT_SECRET || "hemlig nyckel",
+            { expiresIn: "2H" }
+        );
 
-  
+        res.json({ message: "inloggning lyckades", token });
+    } catch (error) {
+        res.status(500).json({ error: "kunde inte logga in" });
+    }
+    
 };
