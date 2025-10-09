@@ -15,7 +15,19 @@ export const getUsers = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
     try {
         const { name, email, password } = req.body;
-        const newUser =  new User({ name, email, password });
+
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ error: "E-postadressen används redan" });
+        }
+        const HashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser =  new User({ 
+            name, 
+            email, 
+            password: HashedPassword, 
+        });
+
         await newUser.save();
         res.status(201).json(newUser);
     } catch (err) {
