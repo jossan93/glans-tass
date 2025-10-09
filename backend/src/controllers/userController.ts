@@ -25,7 +25,8 @@ export const createUser = async (req: Request, res: Response) => {
         const newUser =  new User({ 
             name, 
             email, 
-            password: HashedPassword, 
+            password: HashedPassword,
+            role: "user",
         });
 
         await newUser.save();
@@ -53,7 +54,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
         // skapa JWT-token
         const token = jwt.sign(
-            { userId: user._id, email: user.email },
+            { userId: user._id, email: user.email, role: user.role },
             process.env.JWT_SECRET || "hemlig nyckel",
             { expiresIn: "2H" }
         );
