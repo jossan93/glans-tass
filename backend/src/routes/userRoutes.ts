@@ -42,7 +42,7 @@ router.patch("/:id/make-admin", authMiddleware, adminOnly, async (req, res)=> {
         res.json({ message: `${user.name} är nu admin`, user });
     } catch (error) {
         res.status(500).json({ error: "kunde inte uppdatera användarroll" });
-    }
+}
 });
 
 export default router;
