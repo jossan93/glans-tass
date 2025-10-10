@@ -2,7 +2,6 @@ import { Router } from "express";
 import { getUsers, createUser, loginUser } from "../controllers/userController";
 import { adminOnly, authMiddleware } from "../middelware/auth";
 import  User from "../models/User"
-import { error } from "console";
 
 const router = Router();
 
@@ -73,6 +72,31 @@ router.patch("/:id/remove-admin", authMiddleware, adminOnly, async (req, res) =>
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "kunde inte uppdatera användarroll" });
+    }
+});
+
+router.delete("/:id", authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // hitta användare som ska tas bort
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: "användare hittas inte" });
+        }
+
+        // förhindra att en admin tar bort sig själv
+        const loggedInUserId = (req as any).user.userId;
+        if (user._id.toString() === loggedInUserId) {
+            return res.status(400).json({ error: "du kan inte ta bort ditt eget konto" });
+        }
+
+        await User.findByIdAndDelete(id);
+
+        res.json({ message: `användare ${user.name} har raderats` });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "kunde inte radera användare" })
     }
 });
 
