@@ -12,7 +12,7 @@ router.post("/login", loginUser);
 router.get("/me", authMiddleware, async (req, res) => {
     try {
         const userId = (req as any).user.userId; // från token
-        const user = await User.findById(userId).select("-password")
+        const user = await User.findById(userId).select("-password");
         if (!user) return res.status(404).json({ error: "användare hittas inte" });
         res.json(user);
     } catch {
@@ -23,7 +23,7 @@ router.get("/me", authMiddleware, async (req, res) => {
 // endast admin
 
 // så admin kan se andra användare
-router.get("/all", authMiddleware, adminOnly, getUsers);
+// router.get("/all", authMiddleware, adminOnly, getUsers);
 
 // så en admin kan göra en annan til admin
 router.patch("/:id/make-admin", authMiddleware, adminOnly, async (req, res)=> {
@@ -97,6 +97,17 @@ router.delete("/:id", authMiddleware, adminOnly, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "kunde inte radera användare" })
+    }
+});
+
+// hämta alla användare
+router.get("/all", authMiddleware, adminOnly, async (req, res) => {
+    try {
+        const users = await User.find().select("-password");
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "kunde inte hämta användare" });
     }
 });
 
