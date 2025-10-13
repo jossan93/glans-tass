@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { Request, Response, NextFunction, response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 interface JwtPayload {
     userId: string;
@@ -7,17 +7,22 @@ interface JwtPayload {
     role: string;
 }
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export interface AuthRequest extends Request {
+    user?: JwtPayload;
+}
+
+export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
     const authHeader = req.headers["authorization"];
 
     if ( !authHeader) {
-        return res.status(401).json({ error: "ingen token sickad" });
+        return res.status(401).json({ error: "ingen token skickad" });
     }
 
     const token = authHeader.split(" ")[1]; 
+
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || "hemlig nyckel") as JwtPayload;
-        (req as any).user = decoded;
+        req.user = decoded;
         next();
         } catch (err) {
             res.status(403).json({ error: "ogiltig token" });
@@ -25,9 +30,9 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     };
 
     // endast admin
-    export const adminOnly = (req: Request, res: Response, next: NextFunction) => {
+    export const adminOnly = (req: AuthRequest, res: Response, next: NextFunction) => {
         const user = (req as any).user;
-        if (user?.role !== "admin") {
+        if (req.user?.role !== "admin") {
             return res.status(403).json({ error: "endast admin har tillgång" });
         }
         next();
