@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import mongoose  from "mongoose";
 import dotenv from "dotenv";
+import mongoose  from "mongoose";
+
 import app from "./app";
 
 dotenv.config();
@@ -9,6 +10,11 @@ dotenv.config();
 // const app = express();
 const PORT = process.env.PORT || 3000
 const MONGO_URI = process.env.MONGO_URI;
+
+if (!process.env.JWT_SECRET) {
+    console.error("JWT_SECRET saknas i .env");
+    process.exit(1);
+}
 
  // app.use(cors());
 // app.use(express.json());
