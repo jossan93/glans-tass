@@ -15,7 +15,7 @@ export default function Navbar() {
             <h1 className="navbar-logo">Glans & Tass</h1>
             <div className="navbar-links">
                 <Link to="/">Start</Link>
-                <Link to="/booking">Booking</Link>
+                <Link to="/booking">Bokning</Link>
                 <Link to="/about">Om oss</Link>
                 {user ? (
                     <>
@@ -25,7 +25,10 @@ export default function Navbar() {
                     </button>
                     </>
                 ) : (
+                    <>
                     <Link to="/login">Logga in</Link>
+                    <Link to="/register">Registera</Link>
+                    </>
                 )}
                 
             </div>
