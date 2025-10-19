@@ -14,6 +14,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: {children: ReactNode }) => {
     const [user, setUser] = useState<string | null>(null);
     const [token, setToken] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
@@ -22,6 +23,9 @@ export const AuthProvider = ({ children }: {children: ReactNode }) => {
             setToken(storedToken);
             setUser(storedUser);
         }
+
+        setLoading(false);
+
     }, []);
 
     const login = async (email: string, password: string) => {
@@ -29,8 +33,9 @@ export const AuthProvider = ({ children }: {children: ReactNode }) => {
 
         // api bör returnera {token, user: {name, email } }
         const username = data.user?.name || data.user?.email || "användare"
-        setToken(token);
-        setUser(user);
+        setToken(data.token);
+        setUser(username);
+        
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", username);
     };
@@ -42,6 +47,10 @@ export const AuthProvider = ({ children }: {children: ReactNode }) => {
         localStorage.removeItem("user");
         userApi.logout();
     };
+
+    if (loading) {
+        return <div>laddar...</div>
+    }
 
     return (
         <AuthContext.Provider value={{ user, token, login, logout}}>
