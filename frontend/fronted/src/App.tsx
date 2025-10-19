@@ -7,7 +7,7 @@ import AboutPage from "./pages/AboutPage";
 import BookingPage from "./pages/BookingPage";
 import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
-import "./styles/global.css"
+import "./styles/Global.css"
 import RegisterPage from "./pages/RegisterPage";
 
 function App() {

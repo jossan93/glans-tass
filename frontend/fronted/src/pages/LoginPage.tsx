@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 // import { userApi } from "../api/userApi"
+import "../styles/pages/LoginPage.css"
 
 export default function LoginPage() {
     const { login } = useAuth();

@@ -1,0 +1,16 @@
+footer {
+    background-color: #2d3542;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    font-size: 0,9rem;
+    letter-spacing: 0.5px;
+    border-top: 3px solid #60a5fa;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    margin: 0;
+    color: #e5e7eb;
+}

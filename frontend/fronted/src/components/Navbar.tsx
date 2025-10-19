@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "../styles/Navbar.css"
 
 export default function Navbar() {
     const { user, logout } = useAuth();
@@ -12,7 +13,7 @@ export default function Navbar() {
     
     return (
         <nav className="navbar">
-            <h1 className="navbar-logo">Glans & Tass</h1>
+            <h1 className="navbar-title">Glans & Tass</h1>
             <div className="navbar-links">
                 <Link to="/">Start</Link>
                 <Link to="/booking">Bokning</Link>
