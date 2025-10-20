@@ -51,7 +51,15 @@ export const loginUser = async (req: Request, res: Response) => {
             { expiresIn: "2H" }
         );
 
-        res.json({ message: "inloggning lyckades", token });
+        res.json({
+            message: "inloggning lyckades",
+            token,
+            user: {
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+         });
     } catch (error) {
         res.status(500).json({ error: "kunde inte logga in" });
     }
