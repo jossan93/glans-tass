@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
 import "./styles/Global.css"
 import RegisterPage from "./pages/RegisterPage";
+import ServiceListPage from "./pages/ServiceListPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <main style={{ minHeight: "80vh", padding: "1rem"}}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/service" element={<ServiceListPage />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage />} />

@@ -16,6 +16,7 @@ export default function Navbar() {
             <h1 className="navbar-title">Glans & Tass</h1>
             <div className="navbar-links">
                 <Link to="/">Start</Link>
+                <Link to="/service">Tjänster & Priser</Link>
                 <Link to="/booking">Bokning</Link>
                 <Link to="/about">Om oss</Link>
                 {user ? (
