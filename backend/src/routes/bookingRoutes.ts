@@ -5,7 +5,7 @@ import { authMiddleware } from "../middelware/auth";
 const router = express.Router();
 
 // Lediga tider
-router.get("/available",authMiddleware, getAvailableTimes);
+router.get("/available", getAvailableTimes);
 
 router.post("/", authMiddleware, createBooking);
 router.get("/", authMiddleware, getUserBooking);

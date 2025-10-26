@@ -11,6 +11,18 @@ export const getAllServices = async (req: Request, res: Response) => {
     }
 };
 
+export const getServiceById = async (req: Request, res: Response) => {
+    try {
+        const service = await Service.findById(req.params.id);
+        if (!service) {
+            return res.status(404).json({ message: "tjänst hittades inte" });
+        }
+        res.json(service);
+    } catch (err) {
+        res.status(500).json({ message: "fel vid hämtning av tjänst" });
+    }
+};
+
 // skapa ny tjänst ( som admin skulle kunna lägga till )
 export const createServices = async (req: Request, res: Response) => {
     try {
