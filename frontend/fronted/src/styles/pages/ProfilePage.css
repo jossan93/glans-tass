@@ -26,3 +26,99 @@
     color: #334155;
     margin-bottom: 1rem;
 }
+
+h2 {
+    margin-top: 2rem;
+    color: #1e293b;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.booking-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.booking-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.booking-item:hover {
+    transform: translateY(-2px);
+}
+
+.booking-info h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.1rem;
+}
+
+.booking-info p {
+    margin: 0.3rem 0 0;
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+.status {
+    font-weight: 600;
+}
+
+.status.pending {
+    color: #f59e0b;
+}
+
+.status.confirmed {
+    color: #16a34a;
+}
+
+.status.confirmed {
+    color: #dc2626;
+}
+
+.booking-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-btn,
+.cancel-btn {
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2 ease;
+}
+
+.view-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: #2563eb;
+}
+
+.cancel-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #dc2626;
+}
+
+.success-message {
+    color: #16a34a;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
