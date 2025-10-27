@@ -150,7 +150,7 @@ const BookingPage: React.FC = () => {
 
             if (res.ok) {
                 setMessage("bokning skapad");
-                setTimeout(() => navigate("mina-bokningar"), 1500);
+                setTimeout(() => navigate("/profile"), 1500);
             } else if (res.status === 403) {
                 setMessage("du har inte behörighet. du behöver logga in");
             } else {

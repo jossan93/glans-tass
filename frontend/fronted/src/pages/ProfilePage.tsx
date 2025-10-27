@@ -20,7 +20,10 @@ export default function ProfilePage() {
     const { user, token } = useAuth();
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
-    const [message, setMessage] = useState<string | null>(null);
+   // const [message, setMessage] = useState<string | null>(null);
+    const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
+    const [modalOpen, setModalOpen] = useState(false);
+ //   const [cancelModalOpen, setCancelModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -42,6 +45,7 @@ export default function ProfilePage() {
         fetchBookings();
     }, [token]);
 
+    /*
     const handleCancel = async (id: string) => {
         if (!window.confirm("Är du säker på att du vill avboka?")) return;
 
@@ -63,15 +67,59 @@ export default function ProfilePage() {
         } catch (error) {
             console.error("fell vid avbokning:", error);
         }
+    };*/
+
+    // öppna modal för visa bokninig
+    const handleView = (id: string) => {
+        setSelectedBookingId(id);
+        setModalOpen(true);
     };
 
+    //avbokning
+    const openCancelModal = (id: string) => {
+        setSelectedBookingId(id);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedBookingId(null);
+        setModalOpen(false);
+    };
+
+    //bekräkta avbokning
+    const confirmCancel = async () => {
+        if (!selectedBookingId) return;
+
+        try {
+                const res = await fetch(`${apiUrl}/booking/${selectedBookingId}`, {
+                method: "DELETE",
+                headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            });
+
+            if (res.ok) {
+                setBookings(prev => prev.filter(b => b._id !== selectedBookingId));
+            } else {
+                console.error("misslyckades att avboka");
+            }
+        } catch (error) {
+            console.error("fel vid avbokning:", error);
+        } finally {
+            closeModal();
+        }
+    };
+
+    //hita vald bokning för modal visning
+    const selectedBooking = bookings.find(b => b._id === selectedBookingId)
+/*
     const handleView = (booking: Booking) => {
         alert(
             `Tjänst: ${booking.service.name}\Pris: ${booking.service.price} kr\nTid: ${new Date(
                 booking.date
             ).toLocaleString()}\nStatus: ${booking.status}\nAnteckningar: ${booking.notes || "inga" }`
         );
-    };
+    }; */
 
     return (
         <div className="profile-container">
@@ -83,8 +131,7 @@ export default function ProfilePage() {
             </div>
 
             <h2>Mina bokningar</h2>
-            {message && <p className="success-message">{message}</p>}
-
+            
             {loading ? (
                 <p>Laddar bokningar...</p>
             ) : bookings.length === 0 ? (
@@ -102,20 +149,31 @@ export default function ProfilePage() {
                                 </span>                             
                             </p>
                         </div>
-                        <div className="booking-actions">
-                            <button className="view-btn" onClick={() => handleView(b)}>
 
-                                Visa
-                            </button>
-                            <button className="cancel-btn" onClick={() => handleCancel(b._id)}>
-                           
-                                Avboka
-                            </button>
+                        <div className="booking-actions">
+                            <button className="view-btn" onClick={() => handleView(b._id)}>Visa</button>
+                            <button className="cancel-btn" onClick={() => openCancelModal(b._id)}>Avboka</button>
                         </div>
                         </li>
                     ))}
                 </ul>
-            )}           
+            )}
+
+            {modalOpen && selectedBooking && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h2>{selectedBooking.service.name}</h2>
+                        <p>Pris: {selectedBooking.service.price} kr</p>
+                        <p>Tid: {new Date(selectedBooking.date).toLocaleString()}</p>
+                        <p>Status: {selectedBooking.status}</p>
+                        <p>Anteckningar: {selectedBooking.notes || "inga"}</p>
+                        <div className="modal-buttons">
+                            <button className="confirm-btn" onClick={confirmCancel}>Avboka</button>
+                            <button className="cancel-btn" onClick={closeModal}>Stäng</button>
+                        </div>
+                    </div>
+                    </div>
+                 )}
         </div>
 
     );
