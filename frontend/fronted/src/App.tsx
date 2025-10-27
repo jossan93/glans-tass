@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -21,7 +21,13 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/service" element={<ServiceListPage />} />
-            <Route path="/booking" element={<BookingPage />} />
+
+            {/* fångar /booking utan serviceId och redirectar */}
+            <Route path="/booking" element={<Navigate to="/service" replace />}  />
+
+            {/* Route för booking med serviceID */}
+            <Route path="/booking/:serviceId" element={<BookingPage />} />
+            
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
