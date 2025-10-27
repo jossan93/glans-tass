@@ -24,18 +24,6 @@ if (!MONGO_URI) {
     process.exit(1)
 }
 
-const corsOrigin =
-    process.env.NODE_ENV === "production"
-    ? process.env.FRONTEND_URL
-    : "http://localhost:5173"
-
-app.use(
-    cors({
-        origin: corsOrigin,
-        credentials: true,
-    })
-);
-
 
 mongoose
     .connect(MONGO_URI)

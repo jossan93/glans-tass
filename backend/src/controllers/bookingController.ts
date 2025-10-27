@@ -5,17 +5,26 @@ import { AuthRequest } from "../middelware/auth";
 
 // skapa ny bokning
 export const createBooking = async (req: AuthRequest, res: Response) => {
+    console.log("POST /Booking hit", req.body);
+
     try {
-        const { serviceId, date, notes } = req.body;
+        const { service: serviceId, date, notes } = req.body;
     //    const userId = req.user?.userId; // kräver auth-middleware
 
         if (!req.user?.userId) {
+            console.warn("ej inloggad användare försökte boka");
             return res.status(401).json({ error: "Ej inloggad" });
+        }
+
+        if (!serviceId || !date) {
+            console.warn("saknar serviceId eller date i requst body");
+            return res.status(400).json({ error: "saknar serviceid eller date" });
         }
 
         // kolla att tjänsten finns
         const service = await Service.findById(serviceId);
         if (!service) {
+            console.warn("stjänst hittades inte", serviceId);
             return res.status(404).json({ error: "tjänsten hittades inte" });
         }
 
@@ -26,10 +35,12 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
             notes,
             status: "pending"
         });
+        console.log("Ny bokning sparad", newBooking);
 
         res.status(201).json({ message: "bokning skapad", booking: newBooking });
-    } catch (error) {
-        res.status(500).json({ error: "kunde inte skapa bokning" });
+    } catch (error: any) {
+        console.error("fel vid skapande av bokining", error.message || error);
+        res.status(500).json({ error: "kunde inte skapa bokning", details: error.message || error });
     }
 };
 
