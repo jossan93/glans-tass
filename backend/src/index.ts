@@ -24,7 +24,6 @@ if (!MONGO_URI) {
     process.exit(1)
 }
 
-
 mongoose
     .connect(MONGO_URI)
     .then(() => {
