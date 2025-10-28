@@ -19,9 +19,12 @@ export default function Navbar() {
                 <Link to="/service">Tjänster & Priser</Link>
                 <Link to="/booking">Bokning</Link>
                 <Link to="/about">Om oss</Link>
+
                 {user ? (
                     <>
                     <Link to="/profile">Profil</Link>
+                    
+                    {user.role === "admin" && <Link to="/admin">Admin</Link>}
                     <button onClick={handleLogout} className="logout-btn">
                         logga ut
                     </button>

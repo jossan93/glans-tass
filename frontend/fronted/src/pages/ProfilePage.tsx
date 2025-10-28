@@ -126,7 +126,7 @@ export default function ProfilePage() {
             <h1>Din Profil</h1>
             
             <div className="profile-card">
-                <p>Namn: {user}</p>
+                <p>Namn: {user?.name}</p>
                 
             </div>
 
@@ -178,4 +178,3 @@ export default function ProfilePage() {
 
     );
 }
-

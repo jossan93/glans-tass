@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import "./styles/Global.css"
 import RegisterPage from "./pages/RegisterPage";
 import ServiceListPage from "./pages/ServiceListPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -40,6 +41,17 @@ function App() {
                   </ProtectedRoute>
                 }
                 />
+
+              <Route 
+              path="/admin" 
+                element={
+                  <ProtectedRoute adminOnly>
+                    <AdminPage/>
+                  </ProtectedRoute>
+                }
+                />
+
+
           </Routes>
         </main>
 

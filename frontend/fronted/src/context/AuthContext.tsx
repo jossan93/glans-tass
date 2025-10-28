@@ -2,27 +2,53 @@ import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { userApi } from "../api/userApi";
 
+interface User {
+    _id: string;
+    name: string;
+    email: string;
+    role: "user" | "admin";
+}
+
 interface AuthContextType {
-    user: string | null;
+    user: User | null;
     token: string | null;
-    login: (token: string, user: string) => void;
+    login: (email: string, password: string) => Promise<void>;
     logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: {children: ReactNode }) => {
-    const [user, setUser] = useState<string | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
         const storedUser = localStorage.getItem("user");
-        if (storedToken && storedUser) {
+
+ /*       if (storedToken && storedUser) {
             setToken(storedToken);
-            setUser(storedUser);
-        }
+            try {
+                setUser(JSON.parse(storedUser) as User);
+            } catch (e) {
+                console.error("fel vid läsning av user från localStorage", e);
+                setUser(null)
+            }
+            
+        } */
+        
+            if (storedToken && storedUser) {
+                try {
+                    const parsedUser = JSON.parse(storedUser) as User;
+                    setUser(parsedUser);
+                    setToken(storedToken);
+                } catch (err) {
+                    console.error("fle vid läsning av user från localstorage:", err)
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("token");
+                }
+            }
 
         setLoading(false);
 
@@ -31,13 +57,17 @@ export const AuthProvider = ({ children }: {children: ReactNode }) => {
     const login = async (email: string, password: string) => {
         const data = await userApi.login(email, password);
 
+        if (!data.user || !data.token) {
+            throw new Error("ogilitigt login svar från API")
+        }
+
         // api bör returnera {token, user: {name, email } }
-        const username = data.user?.name || data.user?.email || "användare"
+      //  const username = data.user?.name || data.user?.email || "användare"
         setToken(data.token);
-        setUser(username);
+        setUser(data.user);
         
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", username);
+        localStorage.setItem("user", JSON.stringify(data.user));
     };
 
     const logout = () => {
@@ -61,6 +91,6 @@ export const AuthProvider = ({ children }: {children: ReactNode }) => {
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
-    if (!context) throw new Error("useAuth måste anvädas inom AuthProvider");
+    if (!context) throw new Error("useAuth måste anvädnas inom AuthProvider");
     return context;
 }

@@ -1,0 +1,60 @@
+.admin-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: "f9fafb";
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.admin-container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.notification {
+    margin-bottom: 1.5rem;
+    padding: 0.8rem 1rem;
+    background-color: #16a34a;
+    color: white;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: #334155;
+}
+
+.admin-table th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+@media (max-with: 768px) {
+    .admin-table th,
+    .admin-table td {
+        padding: 0.5rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+}
