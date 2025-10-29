@@ -1,3 +1,24 @@
+.search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.search-input {
+    padding: 8px 12px;
+    width: 300px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 2rem;
+}
+
 .service-page {
     padding: 2rem;
     background-color: #fafafa;

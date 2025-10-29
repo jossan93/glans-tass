@@ -4,7 +4,22 @@ import Service from "../models/Service"
 // hämta alla tjänster
 export const getAllServices = async (req: Request, res: Response) => {
     try {
-        const services = await Service.find({ isActive: true }).sort({ animalType: 1, name: 1 });
+        const { search }= req.query;
+
+        let query: any = {isActive: true};
+
+        if (search && typeof search === "string" && search.trim() !== "") {
+            const searchRegex = new RegExp(search, "i"); // i är inte case sensitive
+            query.$or = [
+                 {name: searchRegex },
+                 {description: searchRegex},
+                 { animalType: searchRegex}
+                  
+            ];
+    
+        }
+
+        const services = await Service.find(query).sort({ animalType: 1, name: 1 });
         res.json(services);
     } catch (error) {
         res.status(500).json({ error: "kunde inte hämta tjänster" });

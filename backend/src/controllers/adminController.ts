@@ -5,7 +5,19 @@ import { AuthRequest } from "../middelware/auth";
 // hämta alla användare
 export const getAllUsers = async (req: Request, res: Response) => {
     try {
-        const users = await User.find().select("-password");
+        const search = (req.query.search as string) || "";
+
+        let filter = {};
+        if (search) {
+
+            filter = {
+                $or: [
+                    {name: {$regex: search, $options: "i" } },
+                    {email: {$regex: search, $options: "i" } },
+                ]
+            };
+            };        
+        const users = await User.find(filter).select("-password").sort({ name: 1 });
         res.json(users);
     } catch (error) {
         console.error(error);

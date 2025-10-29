@@ -15,10 +15,11 @@ import AdminPage from "./pages/AdminPage";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-gray-50">
         <Navbar />
 
-        <main style={{ minHeight: "80vh", padding: "1rem"}}>
+        <main className="flex-grow w-full flex justify-center px-4 py-8">
+          <div className="w-full max-w6x1">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/service" element={<ServiceListPage />} />
@@ -53,6 +54,7 @@ function App() {
 
 
           </Routes>
+          </div>
         </main>
 
         <Footer />

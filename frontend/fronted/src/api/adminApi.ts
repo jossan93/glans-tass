@@ -12,8 +12,9 @@ function getAuthHeaders(): HeadersInit {
 }
 
 // hämta alla användare
-export async function getAllUsers() {
-    const res = await fetch(`${API_URL}/admin/users`, {
+export async function getAllUsers(searchTerm: string = "") {
+    const query = searchTerm ? `?search=${encodeURIComponent(searchTerm)}` : "";
+    const res = await fetch(`${API_URL}/admin/users${query}`, {
         headers: getAuthHeaders(),
     });
     if(!res.ok) throw new Error("kunde inte hämta users");

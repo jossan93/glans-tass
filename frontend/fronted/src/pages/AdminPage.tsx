@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { getAllUsers, makeAdmin, removeAdmin, deleteUser } from "../api";
 import apiUrl from "../config";
 import "../styles/pages/AdminPage.css";
 
@@ -14,12 +15,36 @@ export default function AdminPage() {
         const { token } = useAuth();
         const [users, setUsers] = useState<User[]>([]);
         const [loading, setLoading] = useState(true);
+
         const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
         const [modalOpen, setModalOpen] = useState(false);
         const [modalAction, setModalAction] = useState<"delete" | "makeAdmin" | "removeAdmin" | null>(null);
 
         const [notification, setNotification] = useState<string | null>(null);
 
+        const [search, setSearch] = useState("");
+        const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+useEffect(() => {
+    const handler = setTimeout(() => setDebouncedSearch(search), 600);
+    return () => clearTimeout(handler);
+}, [search]);
+
+useEffect (() => {
+    const fetchUsers = async () => {
+        setLoading(true);
+        try {
+            const data = await getAllUsers(debouncedSearch);
+            setUsers(data);
+        } catch (error) {
+            console.error("kunde inte hämta användare:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetchUsers();
+}, [debouncedSearch]);
+/*
 useEffect(() => {
     const fetchUsers = async () => {
         try {
@@ -35,7 +60,7 @@ useEffect(() => {
         }
     };
     fetchUsers();
-}, [token]);
+}, [token]); */
 
 const openModal = (id: string, action: "delete" | "makeAdmin" | "removeAdmin") => {
     setSelectedUserId(id);
@@ -109,6 +134,16 @@ return (
 
         {notification && <div className="notification">{notification}</div>}
 
+        <div className="search-container">
+            <input
+                type="text"
+                placeholder="Sök efter användare..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+                />
+        </div>
+
         <table className="admin-table">
             <thead>
                 <tr>
@@ -119,7 +154,12 @@ return (
                 </tr>
             </thead>
             <tbody>
-                {users.map(u => (
+                {users.length === 0 ? (
+                    <tr>
+                        <td colSpan={4}>Inga användare hittades</td>
+                    </tr>
+                ) : (
+                users.map(u => (
                     <tr key={u._id}>
                         <td>{u.name}</td>
                         <td>{u.email}</td>
@@ -134,7 +174,8 @@ return (
                             <button className="btn btn-danger" onClick={() => openModal(u._id, "delete")}>Radera</button>
                         </td>
                     </tr>
-                ))}
+                ))
+                )}
             </tbody>
         </table>
 

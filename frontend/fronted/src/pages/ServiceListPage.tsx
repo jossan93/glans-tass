@@ -18,13 +18,17 @@ const ServiceListPage: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
 
+    const [search, setSearch] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+
  //   const navigate = useNavigate();
     //const apiUrl = import.meta.env.VITE_API_URL;
 
-    useEffect(() => {
-        const fetchServices = async () => {
+        const fetchServices = async (term = "") => {
+            setLoading(true);
             try {
-                const res = await fetch(`${apiUrl}/service`);
+                const res = await fetch(`${apiUrl}/service?search=${encodeURIComponent(term)}`);
                 const data = await res.json();
                 setServices(data);
             } catch (err) {
@@ -33,8 +37,15 @@ const ServiceListPage: React.FC = () => {
                 setLoading(false);
             }
         };
-        fetchServices();
-    }, []);
+
+    useEffect(() => {
+    const handler = setTimeout(() => setDebouncedSearch(search), 600);
+    return () => clearTimeout(handler);
+}, [search]);
+
+useEffect(() => {
+    fetchServices(debouncedSearch);
+}, [debouncedSearch]);
 
     const handlelinkClick = (e: React.MouseEvent, serviceId: string) => {
         //kolla om användaren är inloggad
@@ -59,6 +70,8 @@ const ServiceListPage: React.FC = () => {
     const dogServices = services.filter((s) => s.animalType === "hund");
     const catServices = services.filter((s) => s.animalType === "katt");
 
+    const noResults = services.length === 0 && search.trim() !== "";
+
     return (
         <div className="service-page">
             <h1 className="page-title">Våra tjänster</h1>
@@ -68,6 +81,20 @@ const ServiceListPage: React.FC = () => {
 
             {message && <div className="login-warning">{message}</div>}
 
+            <div className="search-container">
+            <input
+                type="text"
+                placeholder="Sök tjänst..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+                />
+        </div>
+
+        {noResults ? (
+            <p className="no-results">Inga tjänster hittades för "{search}".</p>
+        ) : (
+            <>
             <div className="service-section">
                 <h2>Hundtjänster</h2>
                 <div className="service-grid">
@@ -109,6 +136,8 @@ const ServiceListPage: React.FC = () => {
                     ))}
                 </div>
             </div>
+            </>
+        )}
         </div>
     );
 };
