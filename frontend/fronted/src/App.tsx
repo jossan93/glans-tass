@@ -15,7 +15,7 @@ import AdminPage from "./pages/AdminPage";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="app-wrapper">
         <Navbar />
 
         <main className="flex-grow w-full flex justify-center px-4 py-8">
