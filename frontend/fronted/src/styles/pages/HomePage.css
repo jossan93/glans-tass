@@ -5,8 +5,64 @@
     justify-content: center;
     text-align: center;
     padding: 4rem 2rem;
-    min-height: 80vh;
     background-color: #f8fafc;
+}
+
+/*
+.hero-images {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-images img {
+    max-width: 300px;
+    border-radius: 12px;
+    object-fit: cover;
+} */
+.home-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem;
+    flex-wrap: wrap;
+}
+
+/*
+.cat-section .image {
+    max-width: 400px;
+}
+
+.cat-section .text {
+    max-width: 500px;
+} .dog-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+*/
+
+.image {
+    max-width: 400px;
+}
+
+.hero-cat {
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.text {
+    max-width: 500px;
+}
+
+.hero-dogs {
+    border-radius: 12px;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
 }
 
 .home-container h1 {
@@ -21,4 +77,15 @@
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 2rem;
+}
+
+@media (max-width: 768) {
+    .section {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .cat-section .text {
+        text-align: center;
+    }
 }
