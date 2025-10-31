@@ -45,16 +45,28 @@
     margin-bottom: 3rem;
 }
 
-.service-grind {
+.dog-size-info {
+    background-color: #e0f2fe;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: #1e3a8a;
+}
+
+.service-grid {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .service-card {
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 1.2rem;
+    padding: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0 , 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -81,8 +93,9 @@
     padding: 0.6rem 1rem;
     border-radius: 6px;
     cursor: pointer;
-    margin-top: 0.5rem;
+    margin-top: auto;
     transition: background-color 0.2s ease;
+    text-align: center;
 }
 
 .book-btn:hover {

@@ -22,30 +22,30 @@ const ServiceListPage: React.FC = () => {
     const [debouncedSearch, setDebouncedSearch] = useState(search);
 
 
- //   const navigate = useNavigate();
+    //   const navigate = useNavigate();
     //const apiUrl = import.meta.env.VITE_API_URL;
 
-        const fetchServices = async (term = "") => {
-            setLoading(true);
-            try {
-                const res = await fetch(`${apiUrl}/service?search=${encodeURIComponent(term)}`);
-                const data = await res.json();
-                setServices(data);
-            } catch (err) {
-                setError("kunde inte hämta tjänster");
-            } finally {
-                setLoading(false);
-            }
-        };
+    const fetchServices = async (term = "") => {
+        setLoading(true);
+        try {
+            const res = await fetch(`${apiUrl}/service?search=${encodeURIComponent(term)}`);
+            const data = await res.json();
+            setServices(data);
+        } catch (err) {
+            setError("kunde inte hämta tjänster");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-    const handler = setTimeout(() => setDebouncedSearch(search), 600);
-    return () => clearTimeout(handler);
-}, [search]);
+        const handler = setTimeout(() => setDebouncedSearch(search), 600);
+        return () => clearTimeout(handler);
+    }, [search]);
 
-useEffect(() => {
-    fetchServices(debouncedSearch);
-}, [debouncedSearch]);
+    useEffect(() => {
+        fetchServices(debouncedSearch);
+    }, [debouncedSearch]);
 
     const handlelinkClick = (e: React.MouseEvent, serviceId: string) => {
         //kolla om användaren är inloggad
@@ -82,62 +82,68 @@ useEffect(() => {
             {message && <div className="login-warning">{message}</div>}
 
             <div className="search-container">
-            <input
-                type="text"
-                placeholder="Sök tjänst..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="search-input"
+                <input
+                    type="text"
+                    placeholder="Sök tjänst..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="search-input"
                 />
-        </div>
-
-        {noResults ? (
-            <p className="no-results">Inga tjänster hittades för "{search}".</p>
-        ) : (
-            <>
-            <div className="service-section">
-                <h2>Hundtjänster</h2>
-                <div className="service-grid">
-                    {dogServices.map((service) => (
-                        <div key={service._id} className="service-card">
-                            <h3>{service.name}</h3>
-                            <p>{service.description}</p>
-                            <p><strong>Pris:</strong> {service.price} kr</p>
-                            <p><strong>Tid:</strong> {service.duration} min</p>
-                            <Link
-                                to={`/booking/${service._id}`}
-                                className="book-btn"
-                                onClick={(e) => handlelinkClick(e, service._id)}
-                                >
-                                Boka
-                                </Link>
-                        </div>
-                    ))}
-                </div>
             </div>
 
-            <div className="service-section">
-                <h2>Katttjänster</h2>
-                <div className="service-grid">
-                    {catServices.map((service) => (
-                        <div key={service._id} className="service-card">
-                            <h3>{service.name}</h3>
-                            <p>{service.description}</p>
-                            <p><strong>Pris:</strong> {service.price} kr</p>
-                            <p><strong>Tid:</strong> {service.duration} min</p>
-                            <Link
-                                to={`/booking/${service._id}`}
-                                className="book-btn"
-                                onClick={(e) => handlelinkClick(e, service._id)}
-                            >
-                                Boka
-                                </Link>
+            {noResults ? (
+                <p className="no-results">Inga tjänster hittades för "{search}".</p>
+            ) : (
+                <>
+                    <div className="service-section">
+                        <h2>Hundtjänster</h2>
+
+                        <div className="dog-size-info">
+                            <p><strong>Liten hund:</strong> upp till 10 kg</p>
+                            <p><strong>Mellan hund:</strong>10-25 kg</p>
+                            <p><strong>Stror hund:</strong>över 25 kg</p>
                         </div>
-                    ))}
-                </div>
-            </div>
-            </>
-        )}
+                        <div className="service-grid">
+                            {dogServices.map((service) => (
+                                <div key={service._id} className="service-card">
+                                    <h3>{service.name}</h3>
+                                    <p>{service.description}</p>
+                                    <p><strong>Pris:</strong> {service.price} kr</p>
+                                    <p><strong>Tid:</strong> {service.duration} min</p>
+                                    <Link
+                                        to={`/booking/${service._id}`}
+                                        className="book-btn"
+                                        onClick={(e) => handlelinkClick(e, service._id)}
+                                    >
+                                        Boka
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="service-section">
+                        <h2>Katttjänster</h2>
+                        <div className="service-grid">
+                            {catServices.map((service) => (
+                                <div key={service._id} className="service-card">
+                                    <h3>{service.name}</h3>
+                                    <p>{service.description}</p>
+                                    <p><strong>Pris:</strong> {service.price} kr</p>
+                                    <p><strong>Tid:</strong> {service.duration} min</p>
+                                    <Link
+                                        to={`/booking/${service._id}`}
+                                        className="book-btn"
+                                        onClick={(e) => handlelinkClick(e, service._id)}
+                                    >
+                                        Boka
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
