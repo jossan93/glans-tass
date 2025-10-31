@@ -6,8 +6,8 @@ export default function HomePage() {
       <div className="section home-section">
         <div className="image">
           <img
-            src="/public/Photos/cat-bluebackground.jpg"
-            alt="katt blå bakgrund"
+            src="/Photos/cat-whitebg.jpg"
+            alt="katt vit bakgrund"
             className="hero-cat"
           />
         </div>
@@ -23,7 +23,7 @@ export default function HomePage() {
 
         <div className="image">
           <img
-            src="/public/Photos/two-dogs.jpg"
+            src="/Photos/two-dogs.jpg"
             alt="två hundar"
             className="hero-dogs"
           />
