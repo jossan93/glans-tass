@@ -16,26 +16,25 @@ export default function AboutPage() {
           <h1>Om oss</h1>
           <p>
             Glans & Tass är en salong för hundar och katter där vi brinner för
-            pälsvård, hälsa och välmående. Vi har lång erfarenhet av trimming,
-            bad och kloklipping.
+            pälsvård, hälsa och välmående. Vi har lång erfarenhet av pälsvård.
           </p>
           <p>
-            Vårt mål är att varje besök ska kännas tryggt och avslappnat - både
+            Vårt mål är att varje besök ska kännas tryggt och avslappnat både
             för djuren och dig som ägare.
           </p>
           <p>
-            Vi använder endast högkvalitiva produkter och moderna metoder för
-            att säkerställa att ditt djur får bästa möliga omsorg. Oavsett om
-            det är en pälsvårdssession, kloklipping eller ett bad, tar vi hand
+            Vi använder endast högkvalitativa produkter och moderna metoder för
+            att säkerställa att ditt djur får bästa möjliga omsorg. Oavsett om
+            det är en pälsvårdssession, klokklippning eller ett bad tar vi hand
             om varje djur med kärlek och tålamod.
           </p>
           <p>
-            Vårt team består av utbildade och passionerade arbetare som älskar
-            djur. Vi tar oss tid att lära känna varje individ och anppasar
-            behandlingen efter deras behov och temprament.
+            Vårt team består av utbildade och passionerade medarbetare som
+            älskar djur. Vi tar oss tid att lära känna varje individ och
+            anpassar behandlingen efter deras behov och temperament.
           </p>
           <p>
-            Vi tror på förebyggande vård och erbjuder därför råd om pälsvårs och
+            Vi tror på förebyggande vård och erbjuder därför råd om pälsvård och
             skötsel som hjälper dig att hålla din hund eller katt frisk och glad
             mellan besöken.
           </p>

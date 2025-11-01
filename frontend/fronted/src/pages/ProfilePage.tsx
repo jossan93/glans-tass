@@ -20,10 +20,9 @@ export default function ProfilePage() {
     const { user, token } = useAuth();
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
-   // const [message, setMessage] = useState<string | null>(null);
+    
     const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
- //   const [cancelModalOpen, setCancelModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -44,30 +43,6 @@ export default function ProfilePage() {
 
         fetchBookings();
     }, [token]);
-
-    /*
-    const handleCancel = async (id: string) => {
-        if (!window.confirm("Är du säker på att du vill avboka?")) return;
-
-        try {
-            const res = await fetch(`${apiUrl}/booking/${id}`, {
-                method: "DELETE",
-                headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            });
-
-            if (res.ok) {
-                setBookings((prev) => prev.filter((b) => b._id !== id));
-                setMessage(" Bokningen har avbokats");
-                setTimeout(() => setMessage(null), 3000);
-            } else {
-                console.error("misslyckades att avboka");
-            }
-        } catch (error) {
-            console.error("fell vid avbokning:", error);
-        }
-    };*/
 
     // öppna modal för visa bokninig
     const handleView = (id: string) => {
@@ -91,11 +66,11 @@ export default function ProfilePage() {
         if (!selectedBookingId) return;
 
         try {
-                const res = await fetch(`${apiUrl}/booking/${selectedBookingId}`, {
+            const res = await fetch(`${apiUrl}/booking/${selectedBookingId}`, {
                 method: "DELETE",
                 headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
             if (res.ok) {
@@ -111,27 +86,18 @@ export default function ProfilePage() {
     };
 
     //hita vald bokning för modal visning
-    const selectedBooking = bookings.find(b => b._id === selectedBookingId)
-/*
-    const handleView = (booking: Booking) => {
-        alert(
-            `Tjänst: ${booking.service.name}\Pris: ${booking.service.price} kr\nTid: ${new Date(
-                booking.date
-            ).toLocaleString()}\nStatus: ${booking.status}\nAnteckningar: ${booking.notes || "inga" }`
-        );
-    }; */
+    const selectedBooking = bookings.find(b => b._id === selectedBookingId);
 
     return (
         <div className="profile-container">
             <h1>Din Profil</h1>
-            
+
             <div className="profile-card">
                 <p>Namn: {user?.name}</p>
-                
-            </div>
 
+            </div>
             <h2>Mina bokningar</h2>
-            
+
             {loading ? (
                 <p>Laddar bokningar...</p>
             ) : bookings.length === 0 ? (
@@ -141,19 +107,19 @@ export default function ProfilePage() {
                     {bookings.map((b) => (
                         <li key={b._id} className="booking-item">
                             <div className="booking-info">
-                            <h3>{b.service.name}</h3>
-                            <p>
-                                {new Date(b.date).toLocaleString()} -{" "}
-                                <span className={`status ${b.status}`}>
-                                Status: {b.status}   
-                                </span>                             
-                            </p>
-                        </div>
+                                <h3>{b.service.name}</h3>
+                                <p>
+                                    {new Date(b.date).toLocaleString()} -{" "}
+                                    <span className={`status ${b.status}`}>
+                                        Status: {b.status}
+                                    </span>
+                                </p>
+                            </div>
 
-                        <div className="booking-actions">
-                            <button className="view-btn" onClick={() => handleView(b._id)}>Visa</button>
-                            <button className="cancel-btn" onClick={() => openCancelModal(b._id)}>Avboka</button>
-                        </div>
+                            <div className="booking-actions">
+                                <button className="btn-primary" onClick={() => handleView(b._id)}>Visa</button>
+                                <button className="btn-secondary" onClick={() => openCancelModal(b._id)}>Avboka</button>
+                            </div>
                         </li>
                     ))}
                 </ul>
@@ -168,12 +134,12 @@ export default function ProfilePage() {
                         <p>Status: {selectedBooking.status}</p>
                         <p>Anteckningar: {selectedBooking.notes || "inga"}</p>
                         <div className="modal-buttons">
-                            <button className="confirm-btn" onClick={confirmCancel}>Avboka</button>
-                            <button className="cancel-btn" onClick={closeModal}>Stäng</button>
+                            <button className="btn-primary" onClick={confirmCancel}>Avboka</button>
+                            <button className="btn-secondary" onClick={closeModal}>Stäng</button>
                         </div>
                     </div>
-                    </div>
-                 )}
+                </div>
+            )}
         </div>
 
     );

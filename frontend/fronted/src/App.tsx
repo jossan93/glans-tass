@@ -19,7 +19,7 @@ function App() {
         <Navbar />
 
         <main className="flex-grow w-full flex justify-center px-4 py-8">
-          <div className="w-full max-w6x1">
+          <div className="w-full max-w-w6x1">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/service" element={<ServiceListPage />} />

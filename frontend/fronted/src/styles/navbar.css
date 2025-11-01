@@ -3,8 +3,7 @@
     position: relative;
     overflow-x: hidden;
     box-sizing: border-box;
-    background-color: #60a5fa;
-    color: white;
+    background-color: var(--color-bg-darker);
     padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -38,7 +37,7 @@
 }
 
 .navbar a {
-    color: white;
+    color: var(--color-text-dark);
     text-decoration: none;
     font-weight: 500;
 }
@@ -48,9 +47,9 @@
 }
 
 .logout-btn {
-    background: transparent;
-    border: 1px solid white;
-    color: white;
+    background-color: var(--color-accent-darker);
+    border: 1px solid var(--color-dark);
+    color: var(--color-text-light);
     padding: 0.3rem 0.7rem;
     border-radius: 4px;
     cursor: pointer;
@@ -58,7 +57,8 @@
 }
 
 .logout-btn:hover {
-    background: darkblue;
+    background-color: var(--color-accent-warm-lighter);
+        border: 1px solid var(--color-accent-warm);
 }
 
 .hamburger {
@@ -78,7 +78,7 @@
     display: block;
     height: 3px;
     width: 100%;
-    background: white;
+    background-color: var(--color-bg-main);
     border-radius: 2px;
     transition:  all 0.3s ease;
 }
@@ -119,7 +119,7 @@
     .navbar-links {
         flex-direction: column;
         margin-top: 0.5rem;
-        background-color: #60a5fa;
+        background-color: var(--color-bg-darker);
         padding: 0.8rem 0;
         border-radius: 6px;
         gap: 1rem;
@@ -150,6 +150,7 @@
 
     .navbar a {
         font-size: 1rem;
+        color: var(--color-text-dark);
     }
 
     .logout-btn {

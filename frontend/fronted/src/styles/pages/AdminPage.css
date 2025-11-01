@@ -2,44 +2,79 @@
     max-width: 900px;
     margin: 3rem auto;
     padding: 2rem;
-    background-color: "f9fafb";
+    background-color: var(--color-dark);
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px rgba(0, 0, 0, 0.08);
     text-align: center;
+    color: var(--color-text-dark);
 }
 
 .admin-container h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #1e293b;
+    color: var(--color-text-dark)
 }
 
 .notification {
     margin-bottom: 1.5rem;
     padding: 0.8rem 1rem;
-    background-color: #16a34a;
-    color: white;
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
     border-radius: 6px;
     font-weight: 500;
+    box-shadow: 0 8px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
+    background-color: var(--color-bg-secondary);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .admin-table th,
 .admin-table td {
     padding: 0.8rem 1rem;
     text-align: left;
-    border-bottom: #334155;
+    border-bottom: var(--color-bg-darker);
+    color: var(--color-text-dark);
 }
 
 .admin-table th {
-    background-color: #f3f4f6;
+    background-color: var(--color-bg-third);
     font-weight: 600;
-    color: #1e293b;
+    color: var(--color-text-dark);
+}
+
+.admin-table tr:nth-child(even) {
+    background-color: var(--color-bg-main);
+}
+
+.admin-table .btn {
+    min-width: 162px;
+    text-align: center;
+}
+
+.admin-table td.actions {
+    white-space: nowrap;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
 .search-container {
@@ -52,8 +87,14 @@
     padding: 8px 12px;
     width: 300px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-bg-darker);
     font-size: 1rem;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-dark);
+}
+
+.search-input::placeholder {
+    color: var(--color-accent-darker);
 }
 
 .actions {
@@ -62,13 +103,36 @@
 }
 
 @media (max-with: 768px) {
+    .admin-container {
+        padding: 1rem;
+    }
+
+    .search-container {
+        margin-bottom: 1rem;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        border-collapse: collapse;
+    }
+
     .admin-table th,
     .admin-table td {
         padding: 0.5rem;
     }
 
-    .actions {
+    .admin-table td.actions {
         flex-direction: column;
-        gap: 0.3rem;
+        align-items: stretch;
+    }
+
+    .admin-table .btn {
+        width: 100%;
     }
 }

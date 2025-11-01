@@ -5,7 +5,8 @@
     justify-content: center;
     text-align: center;
     padding: 4rem 2rem;
-    background-color: #f8fafc;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-dark);
 }
 
 .about-section {
@@ -14,6 +15,14 @@
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
+    background-color: var(--color-bg-secondary);
+    padding: 2rem;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.about-section:hover {
+    background-color: var(--color-bg-darker);
 }
 
 .image {
@@ -30,6 +39,7 @@
 .text {
     max-width: 500px;
     text-align: left;
+    color: var(--color-text-dark);
 }
 
 .about-dog {
@@ -41,14 +51,14 @@
 
 .about-container h1 {
     font-size: 2.5rem;
-    color: #1e293b;
+    color: var(--color-text-dark);
     margin-bottom: 1rem;
     
 }
 
 .about-container p {
     max-width: 600px;
-    color: #475569;
+    color: var(--color-text-dark);
     font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 2rem;

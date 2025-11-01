@@ -86,7 +86,7 @@ export default function Navbar() {
                         <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>
                     )}
                     <button onClick={handleLogout} className="logout-btn">
-                        logga ut
+                        Logga ut
                     </button>
                     </>
                 ) : (

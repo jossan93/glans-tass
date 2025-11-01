@@ -2,7 +2,8 @@
     max-width: 600px;
     margin: 3rem auto;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--color-bg-darker);
+    color: var(--color-text-dark);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -15,7 +16,7 @@
 }
 
 .service-summary {
-    background-color: #fafafa;
+    background-color: var(--color-bg-secondary);
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 1.5rem;
@@ -30,17 +31,17 @@
 
 .booking-form label {
     font-weight: 500;
-    color: #333;
+    color: var(--color-text-dark);
 }
 
 .booking-form input,
 .booking-form textarea,
 .booking-form select {
     padding: 0.6rem 0.8rem;
-    border: 1px solid #ccc;
+    background-color: var(--color-text-light);
+    border: 1px solid var(--color-bg-darker);
     border-radius: 6px;
     font-size: 1rem;
-    background-color: #fff;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -48,38 +49,19 @@
 .booking-form textarea:focus,
 .booking-form select:focus {
     outline: none;
-    border-color: #4caf50;
-    box-shadow: 0 0 3px rgba(76, 175, 80, 0.4);
+    border-color: var(--color-bg-third);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .booking-form select {
     cursor: pointer;
 }
 
-.submit-btn {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 0.8rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s, transfomr 0.1s;
-}
-
-.submit-btn:hover {
-    background-color: #43a047;
-    transform: translateY(-1px);
-}
-
 .submit-btn:active {
     transform: translateY(0);
 }
 
-.message-box {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    border: 1px solid #81c784;
+.message {
     padding: 0.8rem;
     border-radius: 6px;
     text-align: center;
@@ -90,20 +72,20 @@
 .status-text {
     text-align: center;
     margin-top: 2rem;
-    color: #555;
+    color: var(--color-text-dark);
 }
 
 .loading-text {
     text-align: center;
-    color: #777;
+    color: var(--color-text-dark);
     font-style: italic;
 }
 
 .no-slots {
     text-align: center;
-    color: #c62828;
-    background-color: #ffebee;
-    border: 1px solid #ef9a9a;
+    color: var(--color-text-dark);
+    background-color: var(--color-accent-warm-lighter);
+    border: 1px solid var(--color-accent-warm);
     padding: 0.6rem;
     border-radius: 6px;
 }

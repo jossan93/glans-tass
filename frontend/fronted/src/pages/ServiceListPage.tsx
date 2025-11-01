@@ -54,14 +54,8 @@ const ServiceListPage: React.FC = () => {
         if (!token) {
             e.preventDefault();
             setMessage("Vänligen logga in eller skapa ett konto för att boka en tid online.");
-            setTimeout(() => setMessage(null), 3000);
+            setTimeout(() => setMessage(null), 100000);
         }
-        /*if (token) {
-            navigate(`/booking/${serviceId}`);
-        } else {
-            setMessage("Vänligen logga in eller skapa ett konto för att boka en tid online.");
-            setTimeout(() => setMessage(null), 3000);
-        }*/
     };
 
     if (loading) return <p className="status-text">Laddar tjänster...</p>;
