@@ -127,6 +127,8 @@ export default function AdminPage() {
                 />
             </div>
 
+
+            <div className="admin-table-wrapper">
             <table className="admin-table">
                 <thead>
                     <tr>
@@ -161,7 +163,7 @@ export default function AdminPage() {
                     )}
                 </tbody>
             </table>
-
+</div>
             {modalOpen && (
                 <div className="modal-overlay">
                     <div className="modal-content">
