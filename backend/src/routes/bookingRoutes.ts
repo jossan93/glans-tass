@@ -1,6 +1,11 @@
 console.log("booking routes loaded");
 import express from "express";
-import { createBooking, deleteBooking, getUserBooking, getAvailableTimes } from "../controllers/bookingController";
+import {
+  createBooking,
+  deleteBooking,
+  getUserBooking,
+  getAvailableTimes,
+} from "../controllers/bookingController";
 import { authMiddleware } from "../middelware/auth";
 
 const router = express.Router();

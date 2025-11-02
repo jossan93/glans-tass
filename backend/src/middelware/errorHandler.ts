@@ -1,15 +1,17 @@
 import { ErrorRequestHandler } from "express";
 
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-    console.error(err.stack);
-    
-    if (err.name === "ValidationError") {
-        return res.status(400).json({ error: "ogiltig data", details: err.message });
-    }
+  console.error(err.stack);
 
-    if (err.name === "castError") {
-        return res.status(400).json({ error: "felaktigt Id-format" });
-    }
+  if (err.name === "ValidationError") {
+    return res
+      .status(400)
+      .json({ error: "ogiltig data", details: err.message });
+  }
 
-    res.status(500).json({ error: "något gick fel på servern" });
+  if (err.name === "castError") {
+    return res.status(400).json({ error: "felaktigt Id-format" });
+  }
+
+  res.status(500).json({ error: "något gick fel på servern" });
 };

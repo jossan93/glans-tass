@@ -1,6 +1,10 @@
-import  express  from "express";
-import { createServices, getAllServices, getServiceById } from "../controllers/serviceController";
-import { adminOnly, authMiddleware, } from "../middelware/auth";
+import express from "express";
+import {
+  createServices,
+  getAllServices,
+  getServiceById,
+} from "../controllers/serviceController";
+import { adminOnly, authMiddleware } from "../middelware/auth";
 
 const router = express.Router();
 
