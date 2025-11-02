@@ -105,7 +105,7 @@ const BookingPage: React.FC = () => {
 
     try {
       console.log("POST URL", `${apiUrl}/booking`);
-      console.log("Token", token);
+    //  console.log("Token", token);
       const res = await fetch(`${apiUrl}/booking`, {
         method: "POST",
         headers: {
