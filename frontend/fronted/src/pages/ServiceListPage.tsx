@@ -47,7 +47,7 @@ const ServiceListPage: React.FC = () => {
         fetchServices(debouncedSearch);
     }, [debouncedSearch]);
 
-    const handlelinkClick = (e: React.MouseEvent, serviceId: string) => {
+    const handlelinkClick = (e: React.MouseEvent, _serviceId?: string) => {
         //kolla om användaren är inloggad
         const token = localStorage.getItem("token");
 
