@@ -10,6 +10,30 @@ const app = express();
 // app.use(cors());
 app.use(express.json());
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "glansochtass.netlify.app"
+];
+
+app.use(
+    cors({
+        origin: function(origin, callback) {
+            // till låt requests utan origin
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                console.warn("bocked by cors:", origin);
+                callback(new Error("not allowed by cors"));
+            }
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
+/*
 const corsOrigin =
     process.env.NODE_ENV === "production"
     ? process.env.FRONTEND_URL
@@ -17,13 +41,13 @@ const corsOrigin =
 
 app.use(
     cors({
-        origin: corsOrigin,
+        origin:corsOrigin,
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
-
+*/
 // till låt optian för alla routes
 // app.options("/*", cors());
 
