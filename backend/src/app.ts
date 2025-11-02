@@ -12,7 +12,7 @@ app.use(express.json());
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "glansochtass.netlify.app"
+    "https://glansochtass.netlify.app"
 ];
 
 app.use(
