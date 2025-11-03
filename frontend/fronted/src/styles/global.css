@@ -10,7 +10,6 @@
     --color-accent-warm-lighter: #8D5385;
     --color-text-dark: #1C1C1C;
     --color-text-light: #ffffff;
-
 }
 
 body {
@@ -250,4 +249,3 @@ button:hover {
         padding: 1.5rem;
     }
 }
-
