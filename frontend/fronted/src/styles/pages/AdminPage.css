@@ -12,7 +12,47 @@
 .admin-container h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: var(--color-text-dark)
+    color: var(--color-text-light)
+}
+
+.create-user-container {
+    background-color: var(--color-bg-third);
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0px 8px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.create-user-container h2 {
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.create-user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.create-user-form input {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--color-bg-darker);
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-secondary);
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create-user-form input::placeholder {
+    color: var(--color-accent-darker)
+}
+
+.create-user-form .btn {
+    padding: 0.6rem 1.2rem;
 }
 
 .notification {
@@ -34,17 +74,16 @@
     border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0px 8px rgba(0, 0, 0, 0.05);
+    min-width: 300px;
 }
 
 .admin-table-wrapper {
+    display: flex;
+    justify-content: center;
     overflow-x: auto;
     width: 100%;
-}
-
-.admin-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
 }
 
 .admin-table th,
@@ -71,16 +110,14 @@
 }
 
 .admin-table td.actions {
-    white-space: nowrap;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: center;
 }
 
 .search-container {
     margin: 20px 0;
-    display: flex;
-    justify-content: flex-start;
 }
 
 .search-input {
@@ -97,33 +134,14 @@
     color: var(--color-accent-darker);
 }
 
-.actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
 @media (max-width: 768px) {
+
     .admin-container {
-        padding: 1rem;
-    }
-
-    .search-container {
-        margin-bottom: 1rem;
-    }
-
-    .search-input {
-        width: 100%;
+        padding: 0.3rem;
     }
 
     .admin-table-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        
-    }
-
-    .admin-table {
-        min-width: 300px;
-        white-space: nowrap;
+        padding: 0 0.3rem;
     }
 
     .admin-table th,
@@ -139,7 +157,63 @@
     }
 
     .admin-table .btn {
-        width: 100%;
         min-width: unset;
+        text-align: center;
+    }
+
+    .search-container {
+        margin: 5px 5px 0px 5px;
+        justify-content: center;
+    }
+
+    .create-user-container {
+        padding: 1rem;
+        margin: 0 0.8rem 0.8rem;
+    }
+
+    .create-user-form {
+        gap: 0.6rem;
+    }
+
+    .create-user-form input {
+        font-size: 0.95rem;
+    }
+
+    .create-user-form .btn {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+
+}
+
+/* extra liten skärm */
+
+@media (max-width: 400px) {
+
+    .admin-container,
+    .create-user-container {
+        padding: 1rem;
+        margin: 0 0.8rem 0.8rem;
+    }
+
+    .admin-table .btn {
+        min-width: unset;
+        text-align: center;
+        font-size: 0.8rem;
+        padding: 0.3rem;
+    }
+
+    .search-container {
+        justify-content: center;
+    }
+
+    .create-user-form input,
+    .create-user-form .btn {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .admin-container h1 {
+        font-size: 1.4rem;
     }
 }
