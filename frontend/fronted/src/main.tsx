@@ -15,9 +15,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>
 );
 
-/*
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)*/
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+    .register("/service-worker.js")
+    .then((reg) => console.log("service worker registerad:", reg))
+    .catch((err) => console.error("service worker misslyckades:", err));
+  });
+}

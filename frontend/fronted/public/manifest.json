@@ -1,0 +1,21 @@
+{
+  "name": "Glans & Tass",
+  "short_name": "GlansTass",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e1e1e",
+  "theme_color": "#f5c518",
+  "description": "Glans & Tass - Bokingsystem för dog and cat grooming",
+  "icons": [
+    {
+      "src": "/icons/paw-128px.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/paw-512px.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
