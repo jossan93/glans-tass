@@ -17,7 +17,7 @@ export const getAllServices = async (req: Request, res: Response) => {
       ];
     }
 
-    const services = await Service.find(query).sort({ animalType: 1, order: 1 });
+    const services = await Service.find(query).sort({order: 1 });
     res.json(services);
   } catch (error) {
     res.status(500).json({ error: "kunde inte hämta tjänster" });
