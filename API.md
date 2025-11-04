@@ -1,14 +1,16 @@
 # API-dokumentation
 
-## Innehåll
-1. [User API](#user-api)
-2. [Service API](#service-endpoints)
-3. [Booking API](#booking-endpoints)
-4. [Admin API](#admin-endpoints)
+## Innehållsförteckning
+
+1. [User API](#1-user-api)
+2. [Service API](#2-service-endpoints)
+3. [Booking API](#3-booking-endpoints)
+4. [Admin API](#4-admin-endpoints)
 
 Base URL `https://glans-and-tass.onrender.com/api`
 
-## 1. Register 
+## 1. User
+
 ### POST /users/register
 
 Skapar en ny användare.
@@ -41,8 +43,8 @@ curl -X POST "https://glans-and-tass.onrender.com/api/users/register" \
  { "error": "E-postadressen används redan" }
 ```
 
-### Logga in  POST /users/login
-
+###  POST /users/login
+Logga in
 ```
 curl -X POST "https://glans-and-tass.onrender.com/api/users/login" \
      -H "Content-Type: application/json" \
@@ -73,8 +75,8 @@ curl -X POST "https://glans-and-tass.onrender.com/api/users/login" \
 
 ```
 
-### **Hämta egen profil – GET /users/me**
-
+### GET /users/me
+Hämta egen profil
 ```
 
 curl -X GET "https://glans-and-tass.onrender.com/api/users/me" \
@@ -111,6 +113,7 @@ curl -X GET "https://glans-and-tass.onrender.com/api/users/me" \
 ## **2. Service Endpoints**
 
 ### GET /services \
+
 Hämtar alla tjänster.
 
 ```
@@ -146,7 +149,9 @@ curl -X GET "https://glans-and-tass.onrender.com/api/services?search=hund"
 { "error": "kunde inte hämta tjänster" }
 ```
 
-**GET /services/:id – Hämta tjänst med ID**
+### GET /services/:id
+
+Hämta tjänst med ID
 
 ```
 curl -X GET "https://glans-and-tass.onrender.com/api/services/<service-id>"
@@ -177,7 +182,9 @@ curl -X GET "https://glans-and-tass.onrender.com/api/services/<service-id>"
 { "message": "fel vid hämtning av tjänst" }
 ```
 
-**POST /services – Skapa ny tjänst (admin)**
+### POST /services
+
+Skapa ny tjänst (admin)
 
 ```
 curl -X POST "https://glans-and-tass.onrender.com/api/services" \
@@ -218,7 +225,8 @@ curl -X POST "https://glans-and-tass.onrender.com/api/services" \
 ## 3. Booking Endpoints
 
 ### GET /bookings/available
- Hämta lediga tider
+
+Hämta lediga tider
 
 ```
 curl -X GET "https://glans-and-tass.onrender.com/api/bookings/available?serviceId=<service-id>&date=2025-11-10" \
@@ -257,7 +265,9 @@ curl -X GET "https://glans-and-tass.onrender.com/api/bookings/available?serviceI
 { "message": "kunde inte hämta tillgänliga tider" }
 ```
 
-**POST /bookings/ – Skapa ny bokning**
+### POST /bookings/
+
+Skapa ny bokning
 
 ```
 curl -X POST "https://glans-and-tass.onrender.com/api/bookings" \
@@ -310,7 +320,9 @@ curl -X POST "https://glans-and-tass.onrender.com/api/bookings" \
 { "error": "kunde inte skapa bokning" }
 ```
 
-**GET /bookings/ – Hämta användarens bokningar**
+### GET /bookings/
+
+Hämta användarens bokningar
 
 ```
 curl -X GET "https://glans-and-tass.onrender.com/api/bookings" \
@@ -343,7 +355,9 @@ curl -X GET "https://glans-and-tass.onrender.com/api/bookings" \
 { "error": "kunde inte hämta bokningar" }
 ```
 
-**DELETE /bookings/:id – Ta bort bokning**
+### DELETE /bookings/:id
+
+Ta bort bokning
 
 ```
 curl -X DELETE "https://glans-and-tass.onrender.com/api/bookings/<booking-id>" \
@@ -374,7 +388,7 @@ curl -X DELETE "https://glans-and-tass.onrender.com/api/bookings/<booking-id>" \
 { "error": "kunde inte ta bort bokning" }
 ```
 
-## 4. Admin API
+## 4. Admin Endpoints
 
 Alla endpoints kräver:
 
@@ -385,7 +399,9 @@ Att användaren har rollen admin
 Base URL:
 https://glans-and-tass.onrender.com/api/admin
 
-**GET /users – Hämta alla användare**
+### GET /users
+
+Hämta alla användare
 
 ```
 curl -X GET "https://glans-and-tass.onrender.com/api/admin/users" \
@@ -411,7 +427,9 @@ curl -X GET "https://glans-and-tass.onrender.com/api/admin/users" \
 { "error": "kunde inte hämta användare" }
 ```
 
-**POST /users – Skapa ny användare (som admin)**
+### POST /users
+
+Skapa ny användare (som admin)
 
 ```
 curl -X POST "https://glans-and-tass.onrender.com/api/admin/users" \
@@ -457,7 +475,9 @@ curl -X POST "https://glans-and-tass.onrender.com/api/admin/users" \
 { "error": "kunde inte skapa användare" }
 ```
 
-**PUT /make-admin/:id – Gör användare till admin**
+### PUT /make-admin/:id 
+
+Gör användare till admin
 
 ```
 curl -X PUT "https://glans-and-tass.onrender.com/api/admin/make-admin/<user-id>" \
@@ -496,7 +516,9 @@ curl -X PUT "https://glans-and-tass.onrender.com/api/admin/make-admin/<user-id>"
 { "error": "kunde inte uppdatera användarroll" }
 ```
 
-**PUT /remove-admin/:id – Ta bort admin-roll**
+### PUT /remove-admin/:id
+
+Ta bort admin-roll
 
 ```
 curl -X PUT "https://glans-and-tass.onrender.com/api/admin/remove-admin/<user-id>" \
@@ -535,7 +557,9 @@ curl -X PUT "https://glans-and-tass.onrender.com/api/admin/remove-admin/<user-id
 { "error": "kunde inte uppdatera användarroll" }
 ```
 
-**DELETE /delete-user/:id – Ta bort användare**
+### DELETE /delete-user/:id
+
+Ta bort användare
 
 ```
 curl -X DELETE "https://glans-and-tass.onrender.com/api/admin/delete-user/<user-id>" \
