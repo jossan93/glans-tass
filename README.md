@@ -46,3 +46,10 @@ All information om alla endpoints (User, Service, Booking, Admin) finns i:
 [API.md](./API.md)
 
 > ⚠️ Notera: Admin-endpoints för användare fungerar fullt, men hantering av bokningar via admin är ej färdigutvecklat på frontend.
+
+## Bildkällor
+
+Alla bilder som används på webbplatsen kommer från [Pexels](https://www.pexels.com) och är fria att använda enligt deras licensvillkor.  
+En komplett lista över bilder och deras källor finns i:
+
+[image-sources.md](./image-sources.md)
