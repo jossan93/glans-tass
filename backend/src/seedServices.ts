@@ -53,7 +53,7 @@ const services = [
   {
     name: "Hundbad stor",
     description:
-      "Bad, schamponering, fön och borstning för stor hund.  Kloklippning ingår",
+      "Bad, schamponering, fön och borstning för stor hund. Kloklippning ingår",
     price: 900,
     duration: 90,
     animalType: "hund",

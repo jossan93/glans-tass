@@ -50,7 +50,6 @@ const BookingPage: React.FC = () => {
 
   // hämta lediga tider
   const handleDateChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const selectedDate = e.target.value;
     setDate(selectedDate);
     setSelectedTime("");
@@ -105,7 +104,7 @@ const BookingPage: React.FC = () => {
 
     try {
       console.log("POST URL", `${apiUrl}/booking`);
-    //  console.log("Token", token);
+      //  console.log("Token", token);
       const res = await fetch(`${apiUrl}/booking`, {
         method: "POST",
         headers: {
@@ -143,7 +142,7 @@ const BookingPage: React.FC = () => {
       <h1 className="page-title">Boka {service.name}</h1>
       <div className="service-summary">
         <p>
-          <strong>Beskrivning:</strong> {service.description} kr
+          <strong>Beskrivning:</strong> {service.description}
         </p>
         <p>
           <strong>Pris:</strong> {service.price} kr
