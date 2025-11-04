@@ -12,6 +12,7 @@ const services = [
     price: 200,
     duration: 15,
     animalType: "hund",
+    order: 1,
   },
   {
     name: "Puts av päls hund",
@@ -20,6 +21,7 @@ const services = [
     price: 500,
     duration: 30,
     animalType: "hund",
+    order: 2,
   },
   {
     name: "Tovutredning hund",
@@ -28,6 +30,7 @@ const services = [
     price: 600,
     duration: 60,
     animalType: "hund",
+    order: 3,
   },
   {
     name: "Hundbad liten",
@@ -36,6 +39,7 @@ const services = [
     price: 500,
     duration: 45,
     animalType: "hund",
+    order: 4,
   },
   {
     name: "Hundbad mellan",
@@ -44,6 +48,7 @@ const services = [
     price: 750,
     duration: 60,
     animalType: "hund",
+    order: 5,
   },
   {
     name: "Hundbad stor",
@@ -52,6 +57,7 @@ const services = [
     price: 900,
     duration: 90,
     animalType: "hund",
+    order: 6,
   },
   {
     name: "Full klippning liten hund",
@@ -59,6 +65,7 @@ const services = [
     price: 1000,
     duration: 100,
     animalType: "hund",
+    order: 7,
   },
   {
     name: "Full klippning mellan hund",
@@ -66,6 +73,7 @@ const services = [
     price: 1100,
     duration: 120,
     animalType: "hund",
+    order: 8,
   },
   {
     name: "Full klippning stor hund",
@@ -73,6 +81,7 @@ const services = [
     price: 1300,
     duration: 160,
     animalType: "hund",
+    order: 9,
   },
 
   // kattjänster
@@ -82,6 +91,7 @@ const services = [
     price: 200,
     duration: 15,
     animalType: "katt",
+    order: 10,
   },
   {
     name: "Puts av päls katt",
@@ -90,6 +100,7 @@ const services = [
     price: 500,
     duration: 30,
     animalType: "katt",
+    order: 11,
   },
   {
     name: "Tovutredning katt",
@@ -98,6 +109,7 @@ const services = [
     price: 500,
     duration: 30,
     animalType: "katt",
+    order: 12,
   },
   {
     name: "Kattbad",
@@ -106,6 +118,7 @@ const services = [
     price: 600,
     duration: 60,
     animalType: "katt",
+    order: 13,
   },
   {
     name: "Lejonklippning",
@@ -114,6 +127,7 @@ const services = [
     price: 600,
     duration: 45,
     animalType: "katt",
+    order: 14,
   },
   {
     name: "Kattbad och lejonklippning",
@@ -122,6 +136,7 @@ const services = [
     price: 900,
     duration: 75,
     animalType: "katt",
+    order: 15,
   },
 ];
 

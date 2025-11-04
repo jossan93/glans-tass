@@ -10,6 +10,7 @@ interface Service {
     price: number;
     duration: number;
     animalType: string;
+    order: number;
 }
 
 const ServiceListPage: React.FC = () => {
