@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getAllUsers } from "../api";
-import apiUrl from "../config";
 import "../styles/pages/AdminPage.css";
+import { apiFetch } from "../api/ClientsApi";
 
 interface User {
   _id: string;
@@ -76,18 +76,18 @@ export default function AdminPage() {
 
       switch (modalAction) {
         case "delete":
-          url = `${apiUrl}/admin/delete-user/${selectedUserId}`;
+          url = `/admin/delete-user/${selectedUserId}`;
           method = "DELETE";
           break;
         case "makeAdmin":
-          url = `${apiUrl}/admin/make-admin/${selectedUserId}`;
+          url = `/admin/make-admin/${selectedUserId}`;
           break;
         case "removeAdmin":
-          url = `${apiUrl}/admin/remove-admin/${selectedUserId}`;
+          url = `/admin/remove-admin/${selectedUserId}`;
           break;
       }
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -137,7 +137,7 @@ export default function AdminPage() {
             const password = formData.get("password");
 
             try {
-              const res = await fetch(`${apiUrl}/admin/users`, {
+              const res = await apiFetch(`/admin/users`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -10,8 +10,9 @@ interface Props {
 export default function ProtectedRoute({ children, adminOnly = false }: Props) {
   const { user } = useAuth();
 
+  // om ingen användare finns (exempel JWT har gått ut)
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login?sessionExpired=true" replace />;
   }
 
   if (adminOnly && user.role !== "admin") {
