@@ -6,6 +6,7 @@ import {
     removeAdmin,
     deleteUser,
     adminCreateUser,
+    getAllBookings,
 } from "../controllers/adminController";
 
 const router = express.Router();
@@ -27,5 +28,8 @@ router.put("/remove-admin/:id", removeAdmin);
 
 // ta bort användare
 router.delete("/delete-user/:id", deleteUser);
+
+// hämta alla bokingar
+router.get("/bookings", getAllBookings);
 
 export default router;

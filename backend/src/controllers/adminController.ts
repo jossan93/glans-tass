@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import User from "../models/User";
 import { AuthRequest } from "../middelware/auth";
 import bcrypt from "bcrypt";
+import Booking from "../models/Booking";
 
 // hämta alla användare
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -137,5 +138,19 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "kunde inte radera användare" });
+  }
+};
+
+export const getAllBookings = async (req: AuthRequest, res: Response) => {
+  try {
+    const bookings = await Booking.find()
+    .populate("user", "name email")
+    .populate("service", "name duration price")
+    .sort({ date: 1 });
+
+    res.json(bookings);
+  } catch (error) {
+    console.error("kunde inte hämta alla bokningar:", error);
+    res.status(500).json({ error: "fel vid hämtningar av bokningar" });
   }
 };

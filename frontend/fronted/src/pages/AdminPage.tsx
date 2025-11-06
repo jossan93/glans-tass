@@ -27,6 +27,9 @@ export default function AdminPage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [bookingsLoading, setBookingsLoading] = useState(true);
+
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedSearch(search), 600);
     return () => clearTimeout(handler);
@@ -46,6 +49,26 @@ export default function AdminPage() {
     };
     fetchUsers();
   }, [debouncedSearch]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const res = await apiFetch("/admin/bookings", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) throw new Error("kunde inte hämta bokningar");
+        const data = await res.json();
+        setBookings(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setBookingsLoading(false);
+      }
+    };
+
+    fetchBookings();
+  }, [token]);
 
   const openModal = (
     id: string,
@@ -189,6 +212,7 @@ export default function AdminPage() {
       </div>
 
       <div className="admin-table-wrapper">
+        <h2>Användare</h2>
         <table className="admin-table">
           <thead>
             <tr>
@@ -262,6 +286,38 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+      <div className="admin-bookings-section">
+        <h2>Alla bokningar</h2>
+        {bookingsLoading ? (
+          <p>Laddar bokningar...</p>
+        ) : bookings.length === 0 ? (
+          <p>Inga bokningar hittades</p>
+        ) : (
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Användare</th>
+                <th>Tjänst</th>
+                <th>Datum</th>
+                <th>Status</th>
+                <th>Anteckningar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((b) => (
+                <tr key={b._id}>
+                  <td>{b.user?.name || "okänd"}</td>
+                  <td>{b.service?.name || "okänd"}</td>
+                  <td>{new Date(b.date).toLocaleString("sv-SE")}</td>
+                  <td>{b.status}</td>
+                  <td>{b.notes || ""}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }
