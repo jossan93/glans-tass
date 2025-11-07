@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Types } from "mongoose";
 import dotenv from "dotenv";
 import Service from "./models/Service";
 
@@ -7,6 +8,7 @@ dotenv.config();
 const services = [
   // Hundtjänster
   {
+    _id: new Types.ObjectId("650000000000000000000001"),
     name: "Kloklippning hund",
     description: "Klippning av klor på hund.",
     price: 200,
@@ -15,6 +17,7 @@ const services = [
     order: 1,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000002"),
     name: "Puts av päls hund",
     description:
       "Putsning av päls på valfritt ställe, t.ex under magen, rumpan eller ansiskte.Enstaka tovor tas bort. Kloklippning ingår.",
@@ -24,6 +27,7 @@ const services = [
     order: 2,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000003"),
     name: "Tovutredning hund",
     description:
       "Försiktig utredning av tovor och borstning utan bad. Kloklippning ingår",
@@ -33,6 +37,7 @@ const services = [
     order: 3,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000004"),
     name: "Hundbad liten",
     description:
       "Bad, schamponering, fön och borstning för liten hund. Kloklippning ingår",
@@ -42,6 +47,7 @@ const services = [
     order: 4,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000005"),
     name: "Hundbad mellan",
     description:
       "Bad, schamponering, fön och borstning för mellanstor hund. Kloklippning ingår",
@@ -51,6 +57,7 @@ const services = [
     order: 5,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000006"),
     name: "Hundbad stor",
     description:
       "Bad, schamponering, fön och borstning för stor hund. Kloklippning ingår",
@@ -60,6 +67,7 @@ const services = [
     order: 6,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000007"),
     name: "Full klippning liten hund",
     description: "klippning, bad, öronrengöring, borstning och kloklippning.",
     price: 1000,
@@ -68,6 +76,7 @@ const services = [
     order: 7,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000008"),
     name: "Full klippning mellan hund",
     description: "klippning, bad, öronrengöring, borstning och kloklippning.",
     price: 1100,
@@ -76,6 +85,7 @@ const services = [
     order: 8,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000009"),
     name: "Full klippning stor hund",
     description: "klippning, bad, öronrengöring, borstning och kloklippning.",
     price: 1300,
@@ -86,6 +96,7 @@ const services = [
 
   // kattjänster
   {
+      _id: new Types.ObjectId("650000000000000000000010"),
     name: "Kloklippning katt",
     description: "Klippning av klor på katt.",
     price: 200,
@@ -94,6 +105,7 @@ const services = [
     order: 10,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000011"),
     name: "Puts av päls katt",
     description:
       "Putsning av päls på valfritt ställe, t.ex under magen, rumpan, ansikte. Enstaka tovor tas bort. Kloklippning ingår",
@@ -103,6 +115,7 @@ const services = [
     order: 11,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000012"),
     name: "Tovutredning katt",
     description:
       "Försiktig utredning av tovor och borstning utan bad. Kloklippning ingår",
@@ -112,6 +125,7 @@ const services = [
     order: 12,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000013"),
     name: "Kattbad",
     description:
       "Bad, schamponering, fön och borstning för katt. Kloklippning ingår",
@@ -121,6 +135,7 @@ const services = [
     order: 13,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000014"),
     name: "Lejonklippning",
     description:
       "Kroppen rakas men huvud, ben och svans formklipps. Kloklippning ingår.",
@@ -130,6 +145,7 @@ const services = [
     order: 14,
   },
   {
+      _id: new Types.ObjectId("650000000000000000000015"),
     name: "Kattbad och lejonklippning",
     description:
       "Bad, schamponering, fön och borstning för katt och lejonklippning. Kloklippning ingår",
