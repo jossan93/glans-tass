@@ -3,6 +3,7 @@ import User from "../models/User";
 import { AuthRequest } from "../middelware/auth";
 import bcrypt from "bcrypt";
 import Booking from "../models/Booking";
+import { error } from "console";
 
 // hämta alla användare
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -152,5 +153,35 @@ export const getAllBookings = async (req: AuthRequest, res: Response) => {
   } catch (error) {
     console.error("kunde inte hämta alla bokningar:", error);
     res.status(500).json({ error: "fel vid hämtningar av bokningar" });
+  }
+};
+
+export const updateBookingStatus = async (req: AuthRequest, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!["pending", "confirmed", "cancelled"].includes(status)) {
+      return res.status(400).json({ error: "ogiltig status" });
+    }
+
+    const booking = await Booking.findById(id)
+    .populate("user", "name email")
+    .populate("service", "name");
+
+    if (!booking) {
+      return res.status(404).json({ error: "bokningen hittades inte" });
+    }
+
+    booking.status = status;
+    await booking.save();
+
+    res.json({
+      message: `bokning uppdaterad till ${status}`,
+      booking,
+    });
+  } catch (error) {
+    console.error("kunde inte uppdatera bokningsstatus:", error);
+    res.status(500).json({ error: "fel vid uppdatering av bokningsstatus" });
   }
 };

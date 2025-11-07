@@ -310,7 +310,41 @@ export default function AdminPage() {
                   <td>{b.user?.name || "okänd"}</td>
                   <td>{b.service?.name || "okänd"}</td>
                   <td>{new Date(b.date).toLocaleString("sv-SE")}</td>
-                  <td>{b.status}</td>
+                  <td>
+                    <select
+                      value={b.status}
+                      onChange={async (e) => {
+                        const newStatus = e.target.value;
+                        try {
+                          const res = await apiFetch(`/admin/bookings/${b._id}/status`, {
+                            method: "PUT",
+                            headers: {
+                              "Content-Type": "application/json",
+                              Authorization: `Bearer ${token}`,
+                            },
+                            body: JSON.stringify({ status: newStatus }),
+                          });
+
+                          if (!res.ok) throw new Error("kunde inte uppdatera status");
+                          const data = await res.json();
+
+                          // uppdatera state lokalt så ändringen syns direkt
+                          setBookings((prev) => 
+                            prev.map((bk) =>
+                          bk._id === b._id ? data.booking : bk
+                        )
+                      );
+                        } catch (err) {
+                          console.error(err);
+                          alert("kunde inte ändra status");
+                        }
+                      }}
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        </select>
+                  </td>
                   <td>{b.notes || ""}</td>
                 </tr>
               ))}

@@ -7,6 +7,7 @@ import {
     deleteUser,
     adminCreateUser,
     getAllBookings,
+    updateBookingStatus,
 } from "../controllers/adminController";
 
 const router = express.Router();
@@ -31,5 +32,8 @@ router.delete("/delete-user/:id", deleteUser);
 
 // hämta alla bokingar
 router.get("/bookings", getAllBookings);
+
+// uppdatera status på bokningar
+router.put("/bookings/:id/status", updateBookingStatus);
 
 export default router;
