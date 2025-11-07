@@ -1,4 +1,4 @@
-import { apiFetch } from "./ClientsApi";
+import { apiFetch } from "./clientsApi";
 
 export const userApi = {
   async register(name: string, email: string, password: string) {

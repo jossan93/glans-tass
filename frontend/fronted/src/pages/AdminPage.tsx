@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getAllUsers } from "../api";
 import "../styles/pages/AdminPage.css";
-import { apiFetch } from "../api/ClientsApi";
+import { apiFetch } from "../api/clientsApi";
 
 interface User {
   _id: string;

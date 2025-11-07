@@ -1,4 +1,4 @@
-import { apiFetch } from "./ClientsApi";
+import { apiFetch } from "./clientsApi";
 
 // hämta alla användare
 export async function getAllUsers(searchTerm: string = "") {
