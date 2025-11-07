@@ -145,9 +145,9 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
 export const getAllBookings = async (req: AuthRequest, res: Response) => {
   try {
     const bookings = await Booking.find()
-    .populate("user", "name email")
-    .populate("service", "name duration price")
-    .sort({ date: 1 });
+      .populate("user", "name email")
+      .populate("service", "name duration price")
+      .sort({ date: 1 });
 
     res.json(bookings);
   } catch (error) {
@@ -166,8 +166,8 @@ export const updateBookingStatus = async (req: AuthRequest, res: Response) => {
     }
 
     const booking = await Booking.findById(id)
-    .populate("user", "name email")
-    .populate("service", "name");
+      .populate("user", "name email")
+      .populate("service", "name");
 
     if (!booking) {
       return res.status(404).json({ error: "bokningen hittades inte" });

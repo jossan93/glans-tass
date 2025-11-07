@@ -12,13 +12,13 @@ Administratörer kan hantera användare via ett dashboard.
 - Boka tider för olika tjänster (kloklipp, badning, klippning, m.m.)
 - Skapa och hantera användarkonton
 - Logga in / registrera
-- Administrativa funktioner för användare finns fullt implementerade i backend (CRUD), men hantering av bokningar via admin-dashboard är ännu inte färdigutvecklat.
-- Responsiv design – fungerar på både dator och mobil
+- Administrativa funktioner för användare finns fullt implementerade via backend och admin dashboard.
+- Responsiv design som fungerar på både dator och mobil
 
 ## Teknisk stack
 
 - **Frontend:** React + TypeScript
-- **Backend:** Node.js / Express
+- **Backend:** Node.js / Express (JWT-baserad autentisering)
 - **Databas:** MongoDB
 - **API:** RESTful
 
@@ -45,11 +45,12 @@ Administratörer kan hantera användare via ett dashboard.
 All information om alla endpoints (User, Service, Booking, Admin) finns i:  
 [API.md](./API.md)
 
-> ⚠️ Notera: Admin-endpoints för användare fungerar fullt, men hantering av bokningar via admin är ej färdigutvecklat på frontend.
+> ⚠️ Notera: Skapa nya tjänster som admin finns implementerat i backend, men är ännu ej tillgängligt via frontend.
 
 ## Bildkällor
 
-Alla bilder som används på webbplatsen kommer från [Pexels](https://www.pexels.com) och är fria att använda enligt deras licensvillkor.  
+Alla bilder som används på webbplatsen kommer från [Pexels](https://www.pexels.com) och är fria att använda enligt deras licensvillkor. 
+ 
 En komplett lista över bilder och deras källor finns i:
 
 [image-sources.md](./image-sources.md)
