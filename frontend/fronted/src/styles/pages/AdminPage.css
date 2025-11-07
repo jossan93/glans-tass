@@ -86,7 +86,7 @@
     box-sizing: border-box;
 }
 
-.admin-table-wrapper h2 {
+.admin-users-section h2 {
     text-align: center;
     color: var(--color-text-light);
     padding: 1rem;
@@ -124,6 +124,7 @@
 
 .search-container {
     margin: 20px 0;
+    justify-content: center;
 }
 
 .search-input {

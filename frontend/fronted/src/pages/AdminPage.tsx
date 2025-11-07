@@ -201,6 +201,8 @@ export default function AdminPage() {
         </form>
       </div>
 
+<div className="admin-users-section"> 
+  <h2>Användare</h2>
       <div className="search-container">
         <input
           type="text"
@@ -212,7 +214,7 @@ export default function AdminPage() {
       </div>
 
       <div className="admin-table-wrapper">
-        <h2>Användare</h2>
+       
         <table className="admin-table">
           <thead>
             <tr>
@@ -262,6 +264,7 @@ export default function AdminPage() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
       {modalOpen && (
         <div className="modal-overlay">
@@ -282,13 +285,14 @@ export default function AdminPage() {
               <button className="btn btn-secondary" onClick={closeModal}>
                 Nej
               </button>
+              
             </div>
           </div>
         </div>
       )}
 
       <div className="admin-bookings-section">
-        <h2>Alla bokningar</h2>
+        <h2>Bokningar</h2>
         {bookingsLoading ? (
           <p>Laddar bokningar...</p>
         ) : bookings.length === 0 ? (
