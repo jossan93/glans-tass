@@ -186,46 +186,6 @@ curl -X GET "https://glans-and-tass.onrender.com/api/services/<service-id>"
 { "message": "fel vid hämtning av tjänst" }
 ```
 
-### POST /services
-
-Skapa ny tjänst (admin)
-
-```
-curl -X POST "https://glans-and-tass.onrender.com/api/services" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer <JWT-token>" \
-     -d '{
-           "name": "Hundbad liten",
-           "description": "Bad, schamponering, fön och borstning för liten hund.",
-           "price": 500,
-           "duration": 45,
-           "animalType": "hund"
-         }'
-
-```
-
-**Response 201 (Success)**
-
-```
-{
-  "message": "tjänst skapad",
-  "service": {
-    "_id": "<service-id>",
-    "name": "Hundbad liten",
-    "description": "Bad, schamponering, fön och borstning för liten hund.",
-    "price": 500,
-    "duration": 45,
-    "animalType": "hund"
-  }
-}
-```
-
-**Response 500 (fel vid skapande)**
-
-```
-{ "error": "kunde inte skapa tjänst" }
-```
-
 ## 3. Booking Endpoints
 
 ### GET /bookings/available
@@ -685,4 +645,44 @@ curl -X PUT "https://glans-and-tass.onrender.com/api/admin/bookings/<booking-id>
 
 ```
 { "error": "fel vid uppdatering av bokningsstatus" }
+```
+### POST /create-service
+
+Skapa ny tjänst (admin)
+
+```
+curl -X POST "https://glans-and-tass.onrender.com/api/admin/create-service" \
+     -H "Authorization: Bearer <JWT-token>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "name": "trimma skägg",
+           "description": "trimma skägg.",
+           "price": 200,
+           "duration": 15,
+           "animalType": "hund"
+         }'
+
+```
+
+**Response 201 (Success)**
+
+```
+{
+  "message": "tjänst skapad",
+  "service": {
+    "_id": "<service-id>",
+    "name": "trimma skägg",
+    "description": "trimma skägg.",
+    "price": 200,
+    "duration": 15,
+    "animalType": "hund",
+    "isActive": true
+  }
+}
+```
+
+**Response 500 (fel vid skapande)**
+
+```
+{ "error": "kunde inte skapa tjänst" }
 ```
