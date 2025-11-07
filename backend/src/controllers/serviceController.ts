@@ -35,22 +35,3 @@ export const getServiceById = async (req: Request, res: Response) => {
     res.status(500).json({ message: "fel vid hämtning av tjänst" });
   }
 };
-
-// skapa ny tjänst ( som admin skulle kunna lägga till )
-export const createServices = async (req: Request, res: Response) => {
-  try {
-    const { name, description, price, duration, animalType } = req.body;
-
-    const newService = await Service.create({
-      name,
-      description,
-      price,
-      duration,
-      animalType,
-    });
-
-    res.status(201).json({ message: "tjänst skapad", service: newService });
-  } catch (error) {
-    res.status(500).json({ error: "kunde inte skapa tjänst" });
-  }
-};

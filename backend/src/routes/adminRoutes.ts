@@ -8,6 +8,7 @@ import {
   adminCreateUser,
   getAllBookings,
   updateBookingStatus,
+  createServices,
 } from "../controllers/adminController";
 
 const router = express.Router();
@@ -35,5 +36,7 @@ router.get("/bookings", getAllBookings);
 
 // uppdatera status på bokningar
 router.put("/bookings/:id/status", updateBookingStatus);
+
+router.post("/create-service", createServices);
 
 export default router;

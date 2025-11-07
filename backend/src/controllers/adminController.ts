@@ -4,6 +4,7 @@ import { AuthRequest } from "../middelware/auth";
 import bcrypt from "bcrypt";
 import Booking from "../models/Booking";
 import { error } from "console";
+import Service from "../models/Service";
 
 // hämta alla användare
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -183,5 +184,26 @@ export const updateBookingStatus = async (req: AuthRequest, res: Response) => {
   } catch (error) {
     console.error("kunde inte uppdatera bokningsstatus:", error);
     res.status(500).json({ error: "fel vid uppdatering av bokningsstatus" });
+  }
+};
+
+// skapa ny tjänst ( som admin skulle kunna lägga till )
+export const createServices = async (req: AuthRequest, res: Response) => {
+  try {
+    const { name, description, price, duration, animalType } = req.body;
+
+    const newService = await Service.create({
+      name,
+      description,
+      price,
+      duration,
+      animalType,
+      isActive: true,
+    });
+
+    res.status(201).json({ message: "tjänst skapad", service: newService });
+  } catch (error) {
+    console.error("kunde inte skapa tjänst", error);
+    res.status(500).json({ error: "kunde inte skapa tjänst" });
   }
 };
