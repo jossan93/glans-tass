@@ -37,6 +37,7 @@ router.get("/bookings", getAllBookings);
 // uppdatera status på bokningar
 router.put("/bookings/:id/status", updateBookingStatus);
 
+// skapa ny tjänst
 router.post("/create-service", createServices);
 
 export default router;

@@ -187,7 +187,7 @@ export const updateBookingStatus = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// skapa ny tjänst ( som admin skulle kunna lägga till )
+// skapa ny tjänst
 export const createServices = async (req: AuthRequest, res: Response) => {
   try {
     const { name, description, price, duration, animalType } = req.body;
