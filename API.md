@@ -43,8 +43,10 @@ curl -X POST "https://glans-and-tass.onrender.com/api/users/register" \
  { "error": "E-postadressen används redan" }
 ```
 
-###  POST /users/login
+### POST /users/login
+
 Logga in
+
 ```
 curl -X POST "https://glans-and-tass.onrender.com/api/users/login" \
      -H "Content-Type: application/json" \
@@ -76,7 +78,9 @@ curl -X POST "https://glans-and-tass.onrender.com/api/users/login" \
 ```
 
 ### GET /users/me
+
 Hämta egen profil
+
 ```
 
 curl -X GET "https://glans-and-tass.onrender.com/api/users/me" \
@@ -475,7 +479,7 @@ curl -X POST "https://glans-and-tass.onrender.com/api/admin/users" \
 { "error": "kunde inte skapa användare" }
 ```
 
-### PUT /make-admin/:id 
+### PUT /make-admin/:id
 
 Gör användare till admin
 
@@ -588,4 +592,97 @@ curl -X DELETE "https://glans-and-tass.onrender.com/api/admin/delete-user/<user-
 
 ```
 { "error": "kunde inte radera användare" }
+```
+
+### GET /bookings
+
+Hämta alla bokningar
+
+```
+curl -X GET "https://glans-and-tass.onrender.com/api/admin/bookings" \
+ -H "Authorization: Bearer <JWT-token>"
+```
+
+**Response 200 (Success)**
+
+```
+[
+  {
+    "_id": "<booking-id>",
+    "user": {
+      "_id": "<user-id>",
+      "name": "Alice",
+      "email": "alice@example.com"
+    },
+    "service": {
+      "_id": "<service-id>",
+      "name": "Hundbad liten",
+      "duration": 45,
+      "price": 500
+    },
+    "date": "2025-11-10T10:00:00Z",
+    "notes": "Liten hund, extra omsorg",
+    "status": "pending"
+  }
+]
+```
+
+**Response 500 (serverfel)**
+
+```
+{ "error": "fel vid hämtningar av bokningar" }
+```
+
+### PUT /bookings/:id/status
+
+Uppdatera status på bokning (pending / confirmed / cancelled)
+
+```
+curl -X PUT "https://glans-and-tass.onrender.com/api/admin/bookings/<booking-id>/status" \
+ -H "Authorization: Bearer <JWT-token>" \
+ -H "Content-Type: application/json" \
+ -d '{
+"status": "confirmed"
+}'
+```
+
+**Response 200 (Success)**
+
+```
+{
+  "message": "bokning uppdaterad till confirmed",
+  "booking": {
+    "_id": "<booking-id>",
+    "user": {
+      "_id": "<user-id>",
+      "name": "Alice",
+      "email": "alice@example.com"
+    },
+    "service": {
+      "_id": "<service-id>",
+      "name": "Hundbad liten"
+    },
+    "date": "2025-11-10T10:00:00Z",
+    "notes": "Liten hund, extra omsorg",
+    "status": "confirmed"
+  }
+}
+```
+
+**Response 400 (ogiltig status)**
+
+```
+{ "error": "ogiltig status" }
+```
+
+**Response 404 (bokningen hittades inte)**
+
+```
+{ "error": "bokningen hittades inte" }
+```
+
+**Response 500 (serverfel)**
+
+```
+{ "error": "fel vid uppdatering av bokningsstatus" }
 ```
