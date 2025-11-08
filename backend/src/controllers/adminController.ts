@@ -192,13 +192,22 @@ export const createServices = async (req: AuthRequest, res: Response) => {
   try {
     const { name, description, price, duration, animalType } = req.body;
 
+    if (!name || !description || !price || !duration || !animalType) {
+      return res.status(400).json({ error: "alla fält måste fyllas i" });
+    }
+
+    // för att bestämma nästa order
+    const lastService = await Service.findOne().sort({ order: -1 });
+    const order = lastService ? lastService.order + 1 : 1;
     const newService = await Service.create({
       name,
       description,
       price,
       duration,
       animalType,
+      order,
       isActive: true,
+      isSeeded: false, // markerar att denna skapad av admin inte seed
     });
 
     res.status(201).json({ message: "tjänst skapad", service: newService });

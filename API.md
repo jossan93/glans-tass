@@ -131,7 +131,7 @@ curl -X GET "https://glans-and-tass.onrender.com/api/services"
 curl -X GET "https://glans-and-tass.onrender.com/api/services?search=hund"
 ```
 
-**Response 200**
+**Response 200 (Success)**
 
 ```
 [
@@ -141,7 +141,10 @@ curl -X GET "https://glans-and-tass.onrender.com/api/services?search=hund"
     "description": "Bad, schamponering, fön och borstning för liten hund.",
     "price": 500,
     "duration": 45,
-    "animalType": "hund"
+    "animalType": "hund",
+    "order": 4,
+    "isActive": true
+    "isSeeded": true,
   }
 ]
 
@@ -170,7 +173,13 @@ curl -X GET "https://glans-and-tass.onrender.com/api/services/<service-id>"
   "description": "Bad, schamponering, fön och borstning för liten hund.",
   "price": 500,
   "duration": 45,
-  "animalType": "hund"
+  "animalType": "hund",
+  "order": 4,
+  "isActive": true,
+  "isSeeded": true,
+  "createdAt": "2025-11-08T00:18:46.613Z",
+  "updatedAt": "2025-11-08T01:15:40.879Z"
+}
 }
 ```
 
@@ -553,6 +562,40 @@ curl -X DELETE "https://glans-and-tass.onrender.com/api/admin/delete-user/<user-
 ```
 { "error": "kunde inte radera användare" }
 ```
+### POST /create-service
+
+Skapa ny tjänst (admin)
+```
+curl -X POST "https://glans-and-tass.onrender.com/admin/create-service" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <JWT_TOKEN>" \
+     -d '{
+           "name": "Ny hundservice",
+           "description": "Beskrivning av tjänst",
+           "price": 400,
+           "duration": 30,
+           "animalType": "hund"
+         }'
+```
+**Svar (201 Success)**
+```
+{
+  "message": "tjänst skapad",
+  "service": {
+    "_id": "650000000000000000000016",
+    "name": "Ny hundservice",
+    "description": "Beskrivning av tjänst",
+    "price": 400,
+    "duration": 30,
+    "animalType": "hund",
+    "order": 16,
+    "isActive": true,
+    "isSeeded": false,
+    "createdAt": "2025-11-08T12:00:00.000Z",
+    "updatedAt": "2025-11-08T12:00:00.000Z"
+  }
+}
+```
 
 ### GET /bookings
 
@@ -655,13 +698,12 @@ curl -X POST "https://glans-and-tass.onrender.com/api/admin/create-service" \
      -H "Authorization: Bearer <JWT-token>" \
      -H "Content-Type: application/json" \
      -d '{
-           "name": "trimma skägg",
-           "description": "trimma skägg.",
-           "price": 200,
-           "duration": 15,
+           "name": "Exempel tjänst",
+           "description": "Beskrivning av tjänsten",
+           "price": 500,
+           "duration": 30,
            "animalType": "hund"
          }'
-
 ```
 
 **Response 201 (Success)**
@@ -670,15 +712,25 @@ curl -X POST "https://glans-and-tass.onrender.com/api/admin/create-service" \
 {
   "message": "tjänst skapad",
   "service": {
-    "_id": "<service-id>",
-    "name": "trimma skägg",
-    "description": "trimma skägg.",
-    "price": 200,
-    "duration": 15,
+    "_id": "650000000000000000000016",
+    "name": "Exempel tjänst",
+    "description": "Beskrivning av tjänsten",
+    "price": 500,
+    "duration": 30,
     "animalType": "hund",
-    "isActive": true
+    "order": 16,
+    "isActive": true,
+    "createdAt": "2025-11-04T10:00:00.000Z",
+    "updatedAt": "2025-11-04T10:00:00.000Z",
+    "__v": 0
   }
 }
+```
+
+**Response 400 (saknas fält)**
+
+```
+{ "error": "alla fält måste fyllas i" }
 ```
 
 **Response 500 (fel vid skapande)**

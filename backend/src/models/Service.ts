@@ -6,7 +6,9 @@ export interface IService extends Document {
   price: number;
   duration: number; // i minuter
   animalType: "hund" | "katt";
+  order: number;
   isActive: boolean;
+  isSeeded: false,
 }
 
 const ServiceSchema = new Schema<IService>(
@@ -33,9 +35,17 @@ const ServiceSchema = new Schema<IService>(
       enum: ["hund", "katt"],
       required: true,
     },
+    order: {
+      type: Number,
+      required: true,
+    },
     isActive: {
       type: Boolean,
       default: true,
+    },
+    isSeeded: {
+      type: Boolean,
+      default: false
     },
   },
   { timestamps: true }

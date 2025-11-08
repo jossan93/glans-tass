@@ -179,18 +179,51 @@ async function seed() {
     let createdCount = 0;
     let updatedCount = 0;
 
-    for (const s of services) {
-      const existing = await Service.findOne({ name: s.name });
+    // hämta alla seedade tjänster som tidigare är markerade
+    const existingSeeded = await Service.find({ isSeeded: true });
 
-      if (existing) {
-        await Service.updateOne({ _id: existing._id }, { $set: s });
-        console.log(`uppdaterade: ${s.name}`);
-        updatedCount++;
-      } else {
-        await Service.create(s);
-        console.log(`skapade ny: ${s.name}`);
+    // markera alla seedade tjänster som gamla
+    const existingSeededIds = existingSeeded.map((s) => s._id.toString());
+    const currentSeedIds = services.map((s) => s._id.toString());
+
+    for (const service of services) {
+      const existing = await Service.findOne({ _id: service._id });
+
+      if (!existing) {
+        await Service.create({ ...service, isSeeded: true });
         createdCount++;
+        console.log(`skapade ny: ${service.name}`);
+      } else {
+        const hasChanged =
+          existing.name !== service.name ||
+          existing.description !== service.description ||
+          existing.price !== service.price ||
+          existing.duration !== service.duration ||
+          existing.animalType !== service.animalType ||
+          existing.order !== service.order ||
+          existing.isActive !== service.isActive;
+
+        if (hasChanged) {
+          await Service.updateOne(
+            { _id: existing._id },
+            { ...service, isSeeded: true }
+          );
+
+          updatedCount++;
+          console.log(`uppdaterade: ${service.name}`);
+        } else if (!existing.isSeeded) {
+          await Service.updateOne({ _id: existing._id }, { isSeeded: true });
+          console.log(`markerade som seedad: ${service.name}`);
+        }
       }
+    }
+
+    const toDeleteIds = existingSeededIds.filter(
+      (id) => !currentSeedIds.includes(id)
+    );
+    if (toDeleteIds.length > 0) {
+      await Service.deleteMany({ _id: { $in: toDeleteIds } });
+      console.log(`raderade gamla seedade tjänster: ${toDeleteIds.length}`);
     }
     console.log(
       `\n klart! uppdaterade ${updatedCount} och skapde ${createdCount} tjänster totalt.`
