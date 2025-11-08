@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../styles/pages/ProfilePage.css";
-import { apiFetch } from "../api/ClientsApi";
+import { apiFetch } from "../api/clientsApi";
 
 
 interface Booking {
