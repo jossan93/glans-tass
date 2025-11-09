@@ -24,6 +24,12 @@ Administratörer kan hantera användare via ett dashboard.
 
 ## UX & Design
 
+### screenshots
+Alla designbilder finns samlade i `/design`-mappen.
+[Design-screenshots](/design/design-screenshots.md)
+
+### Designlänkar
+
 ### Persona
 
 [Figma Persona](https://www.figma.com/design/flNiNMKdqb2atmuUEIIqF3/U10?node-id=0-1&t=L9DRP5jEn7CY5Ljz-1)
